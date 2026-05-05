@@ -29,65 +29,87 @@ public class TelaQuestao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        Alternativa1 = new javax.swing.JButton();
+        alternativa1 = new javax.swing.JButton();
+        Alternativa2 = new javax.swing.JButton();
+        Alternativa3 = new javax.swing.JButton();
+        Alternativa4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setText("Alternativa 2");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        alternativa1.setBackground(new java.awt.Color(204, 204, 204));
+        alternativa1.setText("Alternativa 1");
+        alternativa1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), null, new java.awt.Color(153, 153, 153), new java.awt.Color(255, 255, 255)));
+        alternativa1.setFocusPainted(false);
+        alternativa1.addActionListener(this::alternativa1ActionPerformed);
 
-        jButton3.setText("Alternativa 3");
+        Alternativa2.setBackground(new java.awt.Color(204, 204, 204));
+        Alternativa2.setText("Alternativa 2");
+        Alternativa2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), null, new java.awt.Color(153, 153, 153), new java.awt.Color(255, 255, 255)));
+        Alternativa2.setFocusPainted(false);
+        Alternativa2.addActionListener(this::Alternativa2ActionPerformed);
 
-        jButton4.setText("Alternativa 4");
+        Alternativa3.setBackground(new java.awt.Color(204, 204, 204));
+        Alternativa3.setText("Alternativa 3");
+        Alternativa3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), null, new java.awt.Color(153, 153, 153), new java.awt.Color(255, 255, 255)));
+        Alternativa3.setFocusPainted(false);
+        Alternativa3.addActionListener(this::Alternativa3ActionPerformed);
 
-        Alternativa1.setBackground(new java.awt.Color(204, 204, 204));
-        Alternativa1.setText("Alternativa 1");
-        Alternativa1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), null, new java.awt.Color(153, 153, 153), new java.awt.Color(255, 255, 255)));
-        Alternativa1.addActionListener(this::Alternativa1ActionPerformed);
+        Alternativa4.setBackground(new java.awt.Color(204, 204, 204));
+        Alternativa4.setText("Alternativa 4");
+        Alternativa4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), null, new java.awt.Color(153, 153, 153), new java.awt.Color(255, 255, 255)));
+        Alternativa4.setFocusPainted(false);
+        Alternativa4.addActionListener(this::Alternativa4ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Alternativa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                    .addComponent(alternativa1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                    .addComponent(Alternativa3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Alternativa2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Alternativa4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
+                .addGap(156, 156, 156)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Alternativa1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(alternativa1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Alternativa2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(Alternativa3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Alternativa4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void alternativa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alternativa1ActionPerformed
+        alternativa1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(180,180,180), 2, true));
+        alternativa1.setBackground(new java.awt.Color(240,240,240));
+        alternativa1.setFocusPainted(false);
+        alternativa1.setContentAreaFilled(true);
+    }//GEN-LAST:event_alternativa1ActionPerformed
 
-    private void Alternativa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Alternativa1ActionPerformed
-        Alternativa1.setBackground(new java.awt.Color(230, 230, 230));
-        Alternativa1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(180, 180, 180), 2, true));
-    }//GEN-LAST:event_Alternativa1ActionPerformed
+    private void Alternativa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Alternativa2ActionPerformed
+        Alternativa2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(180,180,180), 2, true));
+    }//GEN-LAST:event_Alternativa2ActionPerformed
+
+    private void Alternativa3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Alternativa3ActionPerformed
+        Alternativa3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(180,180,180), 2, true));
+    }//GEN-LAST:event_Alternativa3ActionPerformed
+
+    private void Alternativa4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Alternativa4ActionPerformed
+        Alternativa4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(180,180,180), 2, true));
+    }//GEN-LAST:event_Alternativa4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,9 +137,9 @@ public class TelaQuestao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Alternativa1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton Alternativa2;
+    private javax.swing.JButton Alternativa3;
+    private javax.swing.JButton Alternativa4;
+    private javax.swing.JButton alternativa1;
     // End of variables declaration//GEN-END:variables
 }
