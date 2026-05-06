@@ -22,6 +22,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
-        <exec.mainClass>br.maua.pi_2026_1_etec.PI_2026_1_Etec</exec.mainClass>
+        <exec.mainClass>br.com.pi_2026_1_etec.app.main</exec.mainClass>
     </properties>
 </project>

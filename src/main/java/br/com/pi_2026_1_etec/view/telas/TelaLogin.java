@@ -1,29 +1,34 @@
 package br.com.pi_2026_1_etec.view.telas;
 
+import javax.swing.JOptionPane;
+
 public class TelaLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
-
+    
+    
     public TelaLogin() {
         initComponents();
     }
-
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanelFundoAzul = new javax.swing.JPanel();
+        imageIcon = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanelFundoVermelho = new javax.swing.JPanel();
         jPanelFundoLogin = new javax.swing.JPanel();
         jLabelLogin = new javax.swing.JLabel();
         jLabelEmail = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
         jLabelSenha = new javax.swing.JLabel();
-        jPasswordFieldSenha = new javax.swing.JPasswordField();
+        txtSenha = new javax.swing.JPasswordField();
         jToggleButtonMostrarSenha = new javax.swing.JToggleButton();
         jLabelMostrarSenha = new javax.swing.JLabel();
-        jButtonEntrar = new javax.swing.JButton();
+        entrar = new javax.swing.JButton();
         jLabelRedirecionamentoCadastro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -32,17 +37,33 @@ public class TelaLogin extends javax.swing.JFrame {
         jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelFundoAzul.setBackground(new java.awt.Color(7, 92, 110));
-        jPanelFundoAzul.setPreferredSize(new java.awt.Dimension(387, 335));
+        jPanelFundoAzul.setPreferredSize(new java.awt.Dimension(132, 79));
+
+        imageIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/CPS (1) 2.png"))); // NOI18N
+        imageIcon.setPreferredSize(new java.awt.Dimension(210, 130));
 
         javax.swing.GroupLayout jPanelFundoAzulLayout = new javax.swing.GroupLayout(jPanelFundoAzul);
         jPanelFundoAzul.setLayout(jPanelFundoAzulLayout);
         jPanelFundoAzulLayout.setHorizontalGroup(
             jPanelFundoAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
+            .addGroup(jPanelFundoAzulLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(202, 202, 202)
+                .addComponent(imageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelFundoAzulLayout.setVerticalGroup(
             jPanelFundoAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(jPanelFundoAzulLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelFundoAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFundoAzulLayout.createSequentialGroup()
+                        .addComponent(imageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFundoAzulLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(108, 108, 108))))
         );
 
         jLayeredPane1.add(jPanelFundoAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 390, 350));
@@ -83,18 +104,21 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabelSenha.setText("Senha");
         jPanelFundoLogin.add(jLabelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        jPasswordFieldSenha.setText("jPasswordField1");
-        jPanelFundoLogin.add(jPasswordFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 259, -1));
+        txtSenha.setText("JpasswordField");
+        jPanelFundoLogin.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 259, -1));
+
+        jToggleButtonMostrarSenha.addActionListener(this::jToggleButtonMostrarSenhaActionPerformed);
         jPanelFundoLogin.add(jToggleButtonMostrarSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 13, 13));
 
         jLabelMostrarSenha.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabelMostrarSenha.setText("Mostrar senha");
         jPanelFundoLogin.add(jLabelMostrarSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
-        jButtonEntrar.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonEntrar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonEntrar.setText("Entrar");
-        jPanelFundoLogin.add(jButtonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 225, 259, -1));
+        entrar.setBackground(new java.awt.Color(0, 0, 0));
+        entrar.setForeground(new java.awt.Color(255, 255, 255));
+        entrar.setText("Entrar");
+        entrar.addActionListener(this::entrarActionPerformed);
+        jPanelFundoLogin.add(entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 225, 259, -1));
 
         jLabelRedirecionamentoCadastro.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabelRedirecionamentoCadastro.setText("Ainda não possui login? Faça o cadastro aqui");
@@ -121,9 +145,27 @@ public class TelaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
+                                                  
+    String email = entrar.getText();
+    String senha = new String(txtSenha.getPassword());
+
+    // Apenas simulacao de banco de dados enquanto isso
+    if (email.equals("exemplo@email.com") && senha.equals("1234")) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Login realizado com sucesso.");
+ } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "E-mail ou senha incorretos.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_entrarActionPerformed
+
+    private void jToggleButtonMostrarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonMostrarSenhaActionPerformed
+        if (jToggleButtonMostrarSenha.isSelected()) {
+        txtSenha.setEchoChar((char) 0); 
+    } else {
+        txtSenha.setEchoChar('•'); 
+    }
+    }//GEN-LAST:event_jToggleButtonMostrarSenhaActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -147,7 +189,9 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEntrar;
+    private javax.swing.JButton entrar;
+    private javax.swing.JLabel imageIcon;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelMostrarSenha;
@@ -157,8 +201,8 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelFundoAzul;
     private javax.swing.JPanel jPanelFundoLogin;
     private javax.swing.JPanel jPanelFundoVermelho;
-    private javax.swing.JPasswordField jPasswordFieldSenha;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JToggleButton jToggleButtonMostrarSenha;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }
