@@ -17,8 +17,6 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanelFundoAzul = new javax.swing.JPanel();
-        imageIcon = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jPanelFundoVermelho = new javax.swing.JPanel();
         jPanelFundoLogin = new javax.swing.JPanel();
         jLabelLogin = new javax.swing.JLabel();
@@ -39,31 +37,15 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanelFundoAzul.setBackground(new java.awt.Color(7, 92, 110));
         jPanelFundoAzul.setPreferredSize(new java.awt.Dimension(132, 79));
 
-        imageIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/CPS (1) 2.png"))); // NOI18N
-        imageIcon.setPreferredSize(new java.awt.Dimension(210, 130));
-
         javax.swing.GroupLayout jPanelFundoAzulLayout = new javax.swing.GroupLayout(jPanelFundoAzul);
         jPanelFundoAzul.setLayout(jPanelFundoAzulLayout);
         jPanelFundoAzulLayout.setHorizontalGroup(
             jPanelFundoAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFundoAzulLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(202, 202, 202)
-                .addComponent(imageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 390, Short.MAX_VALUE)
         );
         jPanelFundoAzulLayout.setVerticalGroup(
             jPanelFundoAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFundoAzulLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelFundoAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFundoAzulLayout.createSequentialGroup()
-                        .addComponent(imageIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFundoAzulLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(108, 108, 108))))
+            .addGap(0, 350, Short.MAX_VALUE)
         );
 
         jLayeredPane1.add(jPanelFundoAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 390, 350));
@@ -191,9 +173,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton entrar;
-    private javax.swing.JLabel imageIcon;
     private javax.swing.JButton jButtonRedirecionamentoCadastro;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelMostrarSenha;
