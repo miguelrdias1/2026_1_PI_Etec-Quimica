@@ -18,6 +18,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanelVermelho = new javax.swing.JPanel();
         jPanelAzul = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanelLogin = new javax.swing.JPanel();
         jLabelCadastro = new javax.swing.JLabel();
         jLabelNome = new javax.swing.JLabel();
@@ -52,15 +53,21 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jPanelAzul.setBackground(new java.awt.Color(7, 92, 110));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/LogoCPS.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanelAzulLayout = new javax.swing.GroupLayout(jPanelAzul);
         jPanelAzul.setLayout(jPanelAzulLayout);
         jPanelAzulLayout.setHorizontalGroup(
             jPanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
+            .addGroup(jPanelAzulLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 266, Short.MAX_VALUE))
         );
         jPanelAzulLayout.setVerticalGroup(
             jPanelAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAzulLayout.createSequentialGroup()
+                .addGap(0, 271, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
 
         jLayeredPane1.setLayer(jPanelAzul, javax.swing.JLayeredPane.PALETTE_LAYER);
@@ -177,6 +184,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCriarConta;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCadastro;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelMostrarSenha;
