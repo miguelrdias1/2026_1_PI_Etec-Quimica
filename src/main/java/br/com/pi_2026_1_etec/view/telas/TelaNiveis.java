@@ -1,20 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package br.com.pi_2026_1_etec.view.telas;
 
-/**
- *
- * @author laris
- */
+
 public class TelaNiveis extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaNiveis.class.getName());
 
-    /**
-     * Creates new form TelaNiveis
-     */
+    
     public TelaNiveis() {
         initComponents();
     }
@@ -29,47 +20,67 @@ public class TelaNiveis extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        btnacess = new javax.swing.JButton();
+        btnconfig = new javax.swing.JButton();
+        btnnoturno = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 775, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 460, 775, 460));
-
-        jButton1.setBackground(new java.awt.Color(146, 25, 19));
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 111, 116, 180));
-
-        jButton2.setBackground(new java.awt.Color(107, 44, 45));
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 111, 116, 180));
-
-        jButton3.setBackground(new java.awt.Color(56, 69, 79));
-        jButton3.addActionListener(this::jButton3ActionPerformed);
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 111, 116, 180));
+        jPanel1.setPreferredSize(new java.awt.Dimension(775, 460));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton4.setBackground(new java.awt.Color(7, 92, 110));
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 111, 116, 180));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/Group 16 (1).png"))); // NOI18N
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 116, 180));
 
-        jLabel1.setText("Como funciona o jogo?");
+        jButton3.setBackground(new java.awt.Color(56, 69, 79));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/nivelMedio.png"))); // NOI18N
+        jButton3.addActionListener(this::jButton3ActionPerformed);
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 116, 180));
+
+        jButton2.setBackground(new java.awt.Color(107, 44, 45));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/nivelDificil.png"))); // NOI18N
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 116, 180));
+
+        jButton1.setBackground(new java.awt.Color(146, 25, 19));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/nivelRandom.png"))); // NOI18N
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 116, 180));
+
+        btnacess.setBackground(new java.awt.Color(3, 83, 103));
+        btnacess.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/Acess (1).png"))); // NOI18N
+        jPanel1.add(btnacess, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, 41, 42));
+
+        btnconfig.setBackground(new java.awt.Color(195, 16, 12));
+        btnconfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/Settings (1).png"))); // NOI18N
+        btnconfig.addActionListener(this::btnconfigActionPerformed);
+        jPanel1.add(btnconfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 41, 42));
+
+        btnnoturno.setBackground(new java.awt.Color(0, 0, 0));
+        btnnoturno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/noturno.png"))); // NOI18N
+        btnnoturno.addActionListener(this::btnnoturnoActionPerformed);
+        jPanel1.add(btnnoturno, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 41, 42));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/menu.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
+
         jLabel1.setOpaque(true);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 543, 101));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 463, 101));
+
+        jLabel2.setBackground(new java.awt.Color(10, 141, 168));
+        jLabel2.setOpaque(true);
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 80, 101));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,9 +89,15 @@ public class TelaNiveis extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnconfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconfigActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnconfigActionPerformed
+
+    private void btnnoturnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnoturnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnnoturnoActionPerformed
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -104,11 +121,16 @@ public class TelaNiveis extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnacess;
+    private javax.swing.JButton btnconfig;
+    private javax.swing.JButton btnnoturno;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
