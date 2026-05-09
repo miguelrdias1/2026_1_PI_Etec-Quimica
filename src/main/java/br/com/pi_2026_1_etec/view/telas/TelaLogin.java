@@ -15,6 +15,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanelFundoAzul = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanelFundoVermelho = new javax.swing.JPanel();
         jPanelFundoLogin = new javax.swing.JPanel();
         jLabelLogin = new javax.swing.JLabel();
@@ -35,15 +36,21 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanelFundoAzul.setBackground(new java.awt.Color(7, 92, 110));
         jPanelFundoAzul.setPreferredSize(new java.awt.Dimension(132, 79));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/LogoCPS.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanelFundoAzulLayout = new javax.swing.GroupLayout(jPanelFundoAzul);
         jPanelFundoAzul.setLayout(jPanelFundoAzulLayout);
         jPanelFundoAzulLayout.setHorizontalGroup(
             jPanelFundoAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
+            .addGroup(jPanelFundoAzulLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 258, Short.MAX_VALUE))
         );
         jPanelFundoAzulLayout.setVerticalGroup(
             jPanelFundoAzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFundoAzulLayout.createSequentialGroup()
+                .addGap(0, 271, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
 
         jLayeredPane1.add(jPanelFundoAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 390, 350));
@@ -175,6 +182,7 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton entrar;
     private javax.swing.JButton jButtonRedirecionamentoCadastro;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelMostrarSenha;
