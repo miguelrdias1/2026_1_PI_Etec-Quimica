@@ -28,8 +28,12 @@ public class TelaNiveis extends javax.swing.JFrame {
         btnconfig = new javax.swing.JButton();
         btnnoturno = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -61,7 +65,7 @@ public class TelaNiveis extends javax.swing.JFrame {
         jPanel1.add(btnacess, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, 41, 42));
 
         btnconfig.setBackground(new java.awt.Color(195, 16, 12));
-        btnconfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/Settings (1).png"))); // NOI18N
+        btnconfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/Config.png"))); // NOI18N
         btnconfig.addActionListener(this::btnconfigActionPerformed);
         jPanel1.add(btnconfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 41, 42));
 
@@ -73,12 +77,37 @@ public class TelaNiveis extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/menu.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
 
-        jLabel1.setOpaque(true);
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 463, 101));
-
         jLabel2.setBackground(new java.awt.Color(10, 141, 168));
         jLabel2.setOpaque(true);
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 80, 101));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Como funciona o jogo?");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setText("possui mais dificuldade!");
+        jLabel5.setToolTipText("");
+        jLabel5.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 394, 280, -1));
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setText("Selecione uma das dificuldades acima e pratique");
+        jLabel6.setToolTipText("");
+        jLabel6.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 356, 270, -1));
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel7.setText("o quanto quiser! Seu resultado será guardado");
+        jLabel7.setToolTipText("");
+        jLabel7.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 280, -1));
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel8.setText("para que você possa analisar questões que você");
+        jLabel8.setToolTipText("");
+        jLabel8.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 280, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 450));
 
@@ -128,9 +157,13 @@ public class TelaNiveis extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
