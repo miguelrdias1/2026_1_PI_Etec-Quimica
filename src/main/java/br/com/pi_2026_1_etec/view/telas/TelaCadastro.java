@@ -1,7 +1,10 @@
 package br.com.pi_2026_1_etec.view.telas;
 
-import br.com.pi_2026_1_etec.controller.UsuarioService;
+import javax.swing.JOptionPane;
+
+import br.com.pi_2026_1_etec.controller.UsuarioController;
 import br.com.pi_2026_1_etec.model.Usuario;
+import br.com.pi_2026_1_etec.service.UsuarioService;
 
 public class TelaCadastro extends javax.swing.JFrame {
     
@@ -84,6 +87,21 @@ public class TelaCadastro extends javax.swing.JFrame {
         jButtonCriarConta.setText("Criar conta");
         jButtonCriarConta.addActionListener(this::jButtonCriarContaActionPerformed);
         jPanelLogin.add(jButtonCriarConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 259, -1));
+
+        jButtonCriarConta.addActionListener(e -> {
+            String nome  = txtNome.getText();
+            String email = txtEmail.getText();
+            String senha = new String(txtSenha.getPassword()); 
+
+            UsuarioController controller = new UsuarioController();
+            String resultado = controller.cadastrar(nome, email, senha);
+
+            if (resultado.equals("sucesso")) {
+            JOptionPane.showMessageDialog(this, "Conta criada com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, resultado, "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Informe as suas credenciais para continuar");

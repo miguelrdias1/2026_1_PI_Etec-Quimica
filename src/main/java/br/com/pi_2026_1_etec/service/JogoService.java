@@ -1,4 +1,4 @@
-package br.maua.pi_2026_1_etec;
+package br.com.pi_2026_1_etec.service;
 
 import java.util.Scanner;
 
