@@ -12,6 +12,9 @@ public class TelaGerenciarAlunos extends javax.swing.JFrame {
         jPanelAcertos.setBackground(new java.awt.Color(7 ,92, 110, 15));
         jPanelErros.setBackground(new java.awt.Color(7, 92, 110, 15));
         jPanelGraficos.setBackground(new java.awt.Color(7, 92, 110, 15));
+        
+        System.out.println("X: " + jLabelAlunos.getX());
+        System.out.println("Y: " + jLabelAlunos.getY());
     }
 
     @SuppressWarnings("unchecked")
@@ -20,7 +23,7 @@ public class TelaGerenciarAlunos extends javax.swing.JFrame {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelAlunos = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -49,8 +52,8 @@ public class TelaGerenciarAlunos extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jLabel1.setText("Alunos");
+        jLabelAlunos.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jLabelAlunos.setText("Alunos");
 
         jTextField1.setText("Pesquisar aluno...");
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
@@ -287,7 +290,7 @@ public class TelaGerenciarAlunos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
+                            .addComponent(jLabelAlunos)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -314,7 +317,7 @@ public class TelaGerenciarAlunos extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 25, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(jLabelAlunos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,7 +385,6 @@ public class TelaGerenciarAlunos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -392,6 +394,7 @@ public class TelaGerenciarAlunos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelAlunos;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
