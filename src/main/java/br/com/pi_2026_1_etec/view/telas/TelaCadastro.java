@@ -83,11 +83,11 @@ public class TelaCadastro extends javax.swing.JFrame {
         jButtonCriarConta.setForeground(new java.awt.Color(255, 255, 255));
         jButtonCriarConta.setText("Criar conta");
         jButtonCriarConta.addActionListener(this::jButtonCriarContaActionPerformed);
-        jPanelLogin.add(jButtonCriarConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 259, -1));
+        jPanelLogin.add(jButtonCriarConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 259, -1));
 
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Informe as suas credenciais para continuar");
-        jPanelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 230, -1));
+        jPanelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 250, -1));
 
         javax.swing.GroupLayout jPanelVermelhoLayout = new javax.swing.GroupLayout(jPanelVermelho);
         jPanelVermelho.setLayout(jPanelVermelhoLayout);
