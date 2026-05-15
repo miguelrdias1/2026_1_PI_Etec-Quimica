@@ -1,7 +1,10 @@
 package br.com.pi_2026_1_etec.view.telas;
 
-import br.com.pi_2026_1_etec.controller.UsuarioService;
+import javax.swing.JOptionPane;
+
+import br.com.pi_2026_1_etec.controller.UsuarioController;
 import br.com.pi_2026_1_etec.model.Usuario;
+import br.com.pi_2026_1_etec.service.UsuarioService;
 
 public class TelaCadastro extends javax.swing.JFrame {
     

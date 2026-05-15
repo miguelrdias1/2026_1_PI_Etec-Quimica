@@ -47,7 +47,7 @@
             <properties>
                 <exec.vmArgs></exec.vmArgs>
                 <exec.args>${exec.vmArgs} -classpath %classpath ${exec.mainClass} ${exec.appArgs}</exec.args>
-                <exec.mainClass>br.com.pi_2026_1_etec.view.telas.TelaInicio</exec.mainClass>
+                <exec.mainClass>br.com.pi_2026_1_etec.view.telas.TelaInicialJogo</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <exec.appArgs></exec.appArgs>
             </properties>
