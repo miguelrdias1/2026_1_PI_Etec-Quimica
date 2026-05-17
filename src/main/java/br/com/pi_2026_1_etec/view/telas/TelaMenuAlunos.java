@@ -142,9 +142,9 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
         jLabel8.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         pnlTelaMenu.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 280, 20));
 
-        menu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menu.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         menu.setText("Menu");
-        pnlTelaMenu.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 40, 40));
+        pnlTelaMenu.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 150, 70));
 
         jLayeredPane1.add(pnlTelaMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
