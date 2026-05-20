@@ -164,13 +164,14 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-                                                  
-    String email = entrar.getText();
+                                                 
+    String email = jTextFieldEmail.getText(); 
     String senha = new String(txtSenha.getPassword());
 
     // Apenas simulacao de banco de dados enquanto isso
     if (email.equals("exemplo@email.com") && senha.equals("1234")) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Login realizado com sucesso.");
+        new TelaMenuAlunos().setVisible(true); //vai para a tela de menu dos alunos
+        this.dispose();
  } else {
         javax.swing.JOptionPane.showMessageDialog(this, "E-mail ou senha incorretos.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
     }
