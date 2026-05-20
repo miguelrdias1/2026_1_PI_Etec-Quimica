@@ -31,9 +31,7 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
         btnMedio = new javax.swing.JButton();
         btnDificil = new javax.swing.JButton();
         btnRandom = new javax.swing.JButton();
-        btnacess = new javax.swing.JButton();
         btnconfig = new javax.swing.JButton();
-        btnnoturno = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -92,20 +90,10 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
         btnRandom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/nivelRandom.png"))); // NOI18N
         pnlTelaMenu.add(btnRandom, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 116, 180));
 
-        btnacess.setBackground(new java.awt.Color(3, 83, 103));
-        btnacess.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/Acess (1).png"))); // NOI18N
-        btnacess.addActionListener(this::btnacessActionPerformed);
-        pnlTelaMenu.add(btnacess, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 41, 42));
-
         btnconfig.setBackground(new java.awt.Color(195, 16, 12));
         btnconfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/Config.png"))); // NOI18N
         btnconfig.addActionListener(this::btnconfigActionPerformed);
-        pnlTelaMenu.add(btnconfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 41, 42));
-
-        btnnoturno.setBackground(new java.awt.Color(0, 0, 0));
-        btnnoturno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/noturno.png"))); // NOI18N
-        btnnoturno.addActionListener(this::btnnoturnoActionPerformed);
-        pnlTelaMenu.add(btnnoturno, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, 41, 42));
+        pnlTelaMenu.add(btnconfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, 41, 42));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/menu.png"))); // NOI18N
         pnlTelaMenu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
@@ -163,14 +151,6 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnconfigActionPerformed
 
-    private void btnnoturnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnoturnoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnnoturnoActionPerformed
-
-    private void btnacessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnacessActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnacessActionPerformed
-
     private void btnFacilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacilActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFacilActionPerformed
@@ -217,10 +197,8 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
     private javax.swing.JButton btnMedio;
     private javax.swing.JButton btnRandom;
     private javax.swing.JSlider btnVolume;
-    private javax.swing.JButton btnacess;
     private javax.swing.JButton btnconfig;
     private javax.swing.JButton btnfechar;
-    private javax.swing.JButton btnnoturno;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
