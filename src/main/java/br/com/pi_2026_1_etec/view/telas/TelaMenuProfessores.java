@@ -32,7 +32,7 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
         jLabelSubtitulo3 = new javax.swing.JLabel();
         jLabelDescricao3 = new javax.swing.JLabel();
         jLabelDescricao3Parte2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonGerenciarAlunos = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -40,7 +40,7 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButtonGerenciamentoDePerguntas = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -116,11 +116,11 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
 
         jLabelDescricao3Parte2.setText("progresso no jogo.");
 
-        jButton1.setBackground(new java.awt.Color(7, 92, 110));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Gerenciar alunos");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jButtonGerenciarAlunos.setBackground(new java.awt.Color(7, 92, 110));
+        jButtonGerenciarAlunos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonGerenciarAlunos.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonGerenciarAlunos.setText("Gerenciar alunos");
+        jButtonGerenciarAlunos.addActionListener(this::jButtonGerenciarAlunosActionPerformed);
 
         javax.swing.GroupLayout jPanelTitulo3Layout = new javax.swing.GroupLayout(jPanelTitulo3);
         jPanelTitulo3.setLayout(jPanelTitulo3Layout);
@@ -132,7 +132,7 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
                     .addComponent(jLabelDescricao3Parte2)
                     .addComponent(jLabelSubtitulo3)
                     .addComponent(jLabelDescricao3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonGerenciarAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanelTitulo3Layout.setVerticalGroup(
@@ -145,7 +145,7 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelDescricao3Parte2)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonGerenciarAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -194,10 +194,11 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
 
         jLabel6.setText("Organize por temas e níveis de dificuldade.");
 
-        jButton2.setBackground(new java.awt.Color(146, 25, 19));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Gerenciar perguntas");
+        jButtonGerenciamentoDePerguntas.setBackground(new java.awt.Color(146, 25, 19));
+        jButtonGerenciamentoDePerguntas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonGerenciamentoDePerguntas.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonGerenciamentoDePerguntas.setText("Gerenciar perguntas");
+        jButtonGerenciamentoDePerguntas.addActionListener(this::jButtonGerenciamentoDePerguntasActionPerformed);
 
         javax.swing.GroupLayout jPanelTitulo3_2Layout = new javax.swing.GroupLayout(jPanelTitulo3_2);
         jPanelTitulo3_2.setLayout(jPanelTitulo3_2Layout);
@@ -209,7 +210,7 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonGerenciamentoDePerguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanelTitulo3_2Layout.setVerticalGroup(
@@ -222,7 +223,7 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonGerenciamentoDePerguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -251,9 +252,15 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonGerenciarAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerenciarAlunosActionPerformed
+        new TelaGerenciarAlunos().setVisible(true); // Exibe o que foi criado. Nesse caso, o objeto TelaGerenciarAlunos
+        this.dispose(); // Método dispose encerra e destrói a janela de forma segura
+    }//GEN-LAST:event_jButtonGerenciarAlunosActionPerformed
+
+    private void jButtonGerenciamentoDePerguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerenciamentoDePerguntasActionPerformed
+        new TelaGerenciamentoDePergunta().setVisible(true); //Exibe o que foi criado. Nesse caso, o objeto TelaGerenciamentoDePerguntas
+        this.dispose(); // Método dispose encerra e destrói a janela de forma segura
+    }//GEN-LAST:event_jButtonGerenciamentoDePerguntasActionPerformed
 
    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -278,8 +285,8 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonGerenciamentoDePerguntas;
+    private javax.swing.JButton jButtonGerenciarAlunos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

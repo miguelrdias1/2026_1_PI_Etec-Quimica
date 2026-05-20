@@ -45,11 +45,12 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButtonEdit = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
         jScrollBar1 = new javax.swing.JScrollBar();
+        jButtonVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,7 +95,7 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         jPanel2.add(jPanelTitulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 365, 80));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 25, 19)));
         jPanel6.setForeground(new java.awt.Color(146, 25, 19));
 
         jPanel1.setBackground(new java.awt.Color(146, 25, 19));
@@ -143,14 +144,14 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(255, 102, 102));
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText("Difícil");
+        jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel7.setText("26/05/2026");
 
         jLabel8.setText("14:30");
 
-        jButton3.setText("edit");
-        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jButton3.addActionListener(this::jButton3ActionPerformed);
+        jButtonEdit.setText("edit");
+        jButtonEdit.addActionListener(this::jButtonEditActionPerformed);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -172,8 +173,8 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addGap(115, 115, 115)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
         jPanel6Layout.setVerticalGroup(
@@ -187,7 +188,7 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jButton3))
+                            .addComponent(jButtonEdit))
                         .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -208,21 +209,24 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 690, 320));
         jPanel2.add(jScrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, -1, 320));
 
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(this::jButtonVoltarActionPerformed);
+        jPanel2.add(jButtonVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 11, Short.MAX_VALUE)
+                .addGap(0, 5, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 5, Short.MAX_VALUE))
         );
 
         pack();
@@ -236,9 +240,15 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
+        new TelaAlterarPergunta().setVisible(true); // Exibe o que foi criado. Nesse caso, o objeto TelaAlterarPergunta
+        this.dispose(); // Método dispose encerra e destrói a janela de forma segura
+    }//GEN-LAST:event_jButtonEditActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        new TelaMenuProfessores().setVisible(true); // Exibe o que foi criado. Nesse caso, o objeto TelaMenuProfessores
+        this.dispose(); // Método dispose encerra e destrói a janela de forma segura
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,7 +277,8 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonEdit;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
