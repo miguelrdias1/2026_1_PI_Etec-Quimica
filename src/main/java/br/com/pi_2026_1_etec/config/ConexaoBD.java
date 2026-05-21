@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import io.github.cdimascio.dotenv.Dotenv;
 
 
-public class ConexaoDB {
+public class ConexaoBD {
     private static Dotenv dotenv = Dotenv.load();
     private static String host = dotenv.get("DB_HOST");
     private static String porta = dotenv.get("DB_PORT");
