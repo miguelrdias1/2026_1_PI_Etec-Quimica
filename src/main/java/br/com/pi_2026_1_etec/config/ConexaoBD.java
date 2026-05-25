@@ -3,6 +3,8 @@ package br.com.pi_2026_1_etec.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 
@@ -15,7 +17,7 @@ public class ConexaoBD {
     private static String senha = dotenv.get("DB_PASSWORD");
 
 
-public static Connection obterConexao() throws Exception{
+public static Connection obterConexao() throws SQLException {
     String url = String.format(
     "jdbc:mysql://%s:%s/%s?sslMode=REQUIRED",
     host, porta, db
