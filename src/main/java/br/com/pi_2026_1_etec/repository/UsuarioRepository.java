@@ -46,26 +46,6 @@ public class UsuarioRepository {
             return rs.next();
         }
     }
-
-    public Usuario buscarPorEmail(String email) throws Exception {
-        String sql = "SELECT p.idpessoa, p.nome, p.senha, a.email " +
-                     "FROM pessoa p JOIN aluno a ON a.pessoa_idpessoa = p.idpessoa " +
-                     "WHERE a.email = ?";
-        try (Connection con = ConexaoBD.obterConexao();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Usuario u = new Usuario();
-                u.setId(rs.getInt("idpessoa"));
-                u.setNome(rs.getString("nome"));
-                u.setEmail(rs.getString("email"));
-                u.setSenha(rs.getString("senha"));
-                return u;
-            }
-            return null;
-        }
-    }
     
     public Usuario buscarAlunoPorEmail(String email) throws Exception {
     String sql = "SELECT p.idpessoa, p.nome, p.senha, a.email " +
@@ -92,7 +72,7 @@ public class UsuarioRepository {
                  "FROM pessoa p JOIN professor pr ON pr.pessoa_idpessoa = p.idpessoa " +
                  "WHERE pr.email = ?";
     try (Connection con = ConexaoBD.obterConexao();
-         PreparedStatement ps = con.prepareStatement(sql)) {
+        PreparedStatement ps = con.prepareStatement(sql)) {
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {

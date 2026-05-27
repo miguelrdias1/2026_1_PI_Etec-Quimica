@@ -1,11 +1,61 @@
 package br.com.pi_2026_1_etec.view.telas;
 
+import br.com.pi_2026_1_etec.dao.ImagemDAO;
+import br.com.pi_2026_1_etec.dao.PerguntaDAO;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 public class TelaAlterarPergunta extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaAlterarPergunta.class.getName());
     
-    public TelaAlterarPergunta() {
+    private int idPergunta;
+    
+    public TelaAlterarPergunta(int idPergunta) {
         initComponents();
+        this.idPergunta = idPergunta;
+        carregarImagemAtual();
+    }
+    
+    private void carregarImagemAtual() {
+        String caminho = ImagemDAO.buscarCaminhoImagem(idPergunta);
+        
+        if (caminho != null && !caminho.trim().isEmpty()) {
+            exibirImagem(caminho);
+        } else {
+            jLabelImagem.setIcon(null);
+            jLabelImagem.setText("Sem imagem");
+        }
+    }
+    
+    private void exibirImagem(String caminho) {
+        ImageIcon icone = null;
+        
+        java.net.URL url = getClass().getClassLoader().getResource(caminho);
+        if (url != null) {
+            icone = new ImageIcon(url);
+        } else {
+            java.io.File arquivo = new java.io.File(caminho);
+            if (arquivo.exists()) {
+                icone = new ImageIcon(arquivo.getAbsolutePath());
+            }
+        }
+        
+        if (icone != null && jLabelImagem.getWidth() > 0 && jLabelImagem.getHeight() > 0) {
+            Image imagemRedimensionada = icone.getImage()
+                    .getScaledInstance(jLabelImagem.getWidth(), jLabelImagem.getHeight(), Image.SCALE_SMOOTH);
+            jLabelImagem.setIcon(new ImageIcon(imagemRedimensionada));
+            jLabelImagem.setText(""); 
+        } else if (icone != null) {
+            Image imagemRedimensionada = icone.getImage().getScaledInstance(120, 78, Image.SCALE_SMOOTH);
+            jLabelImagem.setIcon(new ImageIcon(imagemRedimensionada));
+            jLabelImagem.setText("");
+        } else {
+            jLabelImagem.setIcon(null);
+            jLabelImagem.setText("Erro na Mídia");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -36,9 +86,9 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        jButtonAlterarImagem = new javax.swing.JButton();
+        jButtonRemoverImagem = new javax.swing.JButton();
+        jLabelImagem = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
 
@@ -148,22 +198,22 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 25, 19)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("Alterar imagem");
-        jButton2.setToolTipText("");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 130, -1));
+        jButtonAlterarImagem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonAlterarImagem.setText("Alterar imagem");
+        jButtonAlterarImagem.setToolTipText("");
+        jButtonAlterarImagem.addActionListener(this::jButtonAlterarImagemActionPerformed);
+        jPanel3.add(jButtonAlterarImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 130, -1));
 
-        jButton3.setBackground(new java.awt.Color(146, 25, 19));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Remover imagem");
-        jButton3.addActionListener(this::jButton3ActionPerformed);
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 130, -1));
+        jButtonRemoverImagem.setBackground(new java.awt.Color(146, 25, 19));
+        jButtonRemoverImagem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonRemoverImagem.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonRemoverImagem.setText("Remover imagem");
+        jButtonRemoverImagem.addActionListener(this::jButtonRemoverImagemActionPerformed);
+        jPanel3.add(jButtonRemoverImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 130, -1));
 
-        jLabel8.setText("Imagem");
-        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 120, 78));
+        jLabelImagem.setText("Imagem");
+        jLabelImagem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanel3.add(jLabelImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 120, 78));
 
         jButton1.setBackground(new java.awt.Color(146, 25, 19));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -269,22 +319,32 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButtonAlterarImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarImagemActionPerformed
+      
+    }//GEN-LAST:event_jButtonAlterarImagemActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButtonRemoverImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverImagemActionPerformed
+        int confirmar = JOptionPane.showConfirmDialog(
+                this,
+                "Deseja remover a imagem desta pergunta?",
+                "Confirmar remoção",
+                JOptionPane.YES_NO_OPTION
+        );
+        
+        if (confirmar == JOptionPane.YES_OPTION) {
+            PerguntaDAO.removerImagem(idPergunta);
+            jLabelImagem.setIcon(null);
+            jLabelImagem.setText("Imagem");
+            
+            JOptionPane.showMessageDialog(this, "Imagem removida com sucesso!");
+        }
+    }//GEN-LAST:event_jButtonRemoverImagemActionPerformed
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         new TelaGerenciamentoDePergunta().setVisible(true); // Exibe o que foi criado. Nesse caso, o objeto TelaGerenciamentoPergunta
         this.dispose(); // Método dispose encerra e destrói a janela de forma segura
     }//GEN-LAST:event_jButtonVoltarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -304,17 +364,17 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaAlterarPergunta().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TelaAlterarPergunta(1).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButtonAlterarImagem;
+    private javax.swing.JButton jButtonRemoverImagem;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -324,7 +384,7 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelImagem;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
