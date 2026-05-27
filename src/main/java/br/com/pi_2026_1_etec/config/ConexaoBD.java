@@ -18,9 +18,10 @@ public class ConexaoBD {
 
 public static Connection obterConexao() throws SQLException {
     String url = String.format(
-    "jdbc:mysql://%s:%s/%s?sslMode=REQUIRED",
-    host, porta, db
+        "jdbc:mysql://%s:%s/%s?useSSL=true&requireSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true",
+        host, porta, db
     );
+    
     return DriverManager.getConnection(url, usuario, senha);
     }
 }

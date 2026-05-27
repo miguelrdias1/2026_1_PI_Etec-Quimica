@@ -32,6 +32,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabelMostrarSenha = new javax.swing.JLabel();
         jButtonCriarConta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButtonVoltarLogin = new javax.swing.JButton();
         jPanelAzul = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -91,6 +92,13 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Informe as suas credenciais para continuar");
         jPanelLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 250, -1));
+
+        jButtonVoltarLogin.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jButtonVoltarLogin.setForeground(new java.awt.Color(51, 51, 255));
+        jButtonVoltarLogin.setText("Voltar para a página de login");
+        jButtonVoltarLogin.setBorder(null);
+        jButtonVoltarLogin.addActionListener(this::jButtonVoltarLoginActionPerformed);
+        jPanelLogin.add(jButtonVoltarLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 130, -1));
 
         javax.swing.GroupLayout jPanelVermelhoLayout = new javax.swing.GroupLayout(jPanelVermelho);
         jPanelVermelho.setLayout(jPanelVermelhoLayout);
@@ -186,6 +194,11 @@ public class TelaCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
+    private void jButtonVoltarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarLoginActionPerformed
+        new TelaLogin().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonVoltarLoginActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -210,6 +223,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCriarConta;
+    private javax.swing.JButton jButtonVoltarLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
