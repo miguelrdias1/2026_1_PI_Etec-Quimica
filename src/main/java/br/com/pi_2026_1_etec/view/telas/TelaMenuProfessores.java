@@ -12,6 +12,8 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
         
         jPanelTitulo3_2.setBackground(new java.awt.Color(146, 25, 19, 15));
         jPanelTitulo3_2.setOpaque(true);
+
+        carregarNumeroDeAlunos();
     }
 
    @SuppressWarnings("unchecked")
@@ -261,6 +263,21 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
         new TelaGerenciamentoDePergunta().setVisible(true); //Exibe o que foi criado. Nesse caso, o objeto TelaGerenciamentoDePerguntas
         this.dispose(); // Método dispose encerra e destrói a janela de forma segura
     }//GEN-LAST:event_jButtonGerenciamentoDePerguntasActionPerformed
+
+//méotodo para mudar o numero de alunos ativos conforme são cadastrados by isa!
+    private void carregarNumeroDeAlunos() {
+        try {
+            AlunoDAO dao = new AlunoDAO();
+            int total = dao.contarAlunos();
+            // Exibe o número no label de "Alunos ativos"
+            jLabelSubtitulo2.setText(String.valueOf(total));
+        } catch (Exception e) {
+            jLabelSubtitulo2.setText("--");
+            logger.log(java.util.logging.Level.SEVERE, "Erro ao carregar número de alunos", e);
+        }
+    }
+
+
 
    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
