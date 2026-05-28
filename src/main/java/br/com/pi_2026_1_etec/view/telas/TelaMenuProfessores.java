@@ -262,7 +262,6 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
         this.dispose(); // Método dispose encerra e destrói a janela de forma segura
     }//GEN-LAST:event_jButtonGerenciamentoDePerguntasActionPerformed
 
-
    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
