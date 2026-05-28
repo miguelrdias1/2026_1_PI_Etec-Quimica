@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import br.com.pi_2026_1_etec.model.Usuario;
+
 import br.com.pi_2026_1_etec.config.ConexaoBD;
+import br.com.pi_2026_1_etec.model.Usuario;
 
 public class UsuarioRepository {
 
-    public void cadastrar(Usuario usuario) throws Exception {
+    public void cadastrarAluno(Usuario usuario) throws SQLException {
         String sqlPessoa = "INSERT INTO pessoa (nome, senha) VALUES (?, ?)";
         String sqlAluno = "INSERT INTO aluno (pessoa_idpessoa, email) VALUES (?, ?)";
         String sqlProfessor = "INSERT INTO professor (pessoa_idpessoa, email) VALUES (?, ?)";
@@ -43,7 +44,35 @@ public class UsuarioRepository {
         }
     }
 
-    public boolean emailJaExiste(String email) throws Exception {
+    public void cadastrarProfessor(Usuario usuario) throws SQLException {
+        String sqlPessoa = "INSERT INTO pessoa (nome, senha) VALUES (?, ?)";
+        String sqlProfessor = "INSERT INTO professor (pessoa_idpessoa, email) VALUES (?, ?)";
+
+        try (Connection con = ConexaoBD.obterConexao()) {
+            con.setAutoCommit(false);
+
+            try (PreparedStatement psPessoa = con.prepareStatement(sqlPessoa, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                psPessoa.setString(1, usuario.getNome());
+                psPessoa.setString(2, usuario.getSenha());
+                psPessoa.executeUpdate();
+
+                ResultSet chave = psPessoa.getGeneratedKeys();
+                if (chave.next()) {
+                    int idPessoa = chave.getInt(1);
+
+                    try (PreparedStatement psProfessor = con.prepareStatement(sqlProfessor)) {
+                        psProfessor.setInt(1, idPessoa);
+                        psProfessor.setString(2, usuario.getEmail());
+                        psProfessor.executeUpdate();
+                    }
+                }
+            }
+
+            con.commit();
+        }
+    }
+
+    public boolean emailJaExiste(String email) throws SQLException {
         String sql = "SELECT email FROM aluno WHERE email = ?";
         try (Connection con = ConexaoBD.obterConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -53,7 +82,7 @@ public class UsuarioRepository {
         }
     }
     
-    public Usuario buscarAlunoPorEmail(String email) throws Exception {
+    public Usuario buscarAlunoPorEmail(String email) throws SQLException {
     String sql = "SELECT p.idpessoa, p.nome, p.senha, a.email " +
                  "FROM pessoa p JOIN aluno a ON a.pessoa_idpessoa = p.idpessoa " +
                  "WHERE a.email = ?";
@@ -73,7 +102,7 @@ public class UsuarioRepository {
     }
     }
     
-    public Usuario buscarProfessorPorEmail(String email) throws Exception {
+    public Usuario buscarProfessorPorEmail(String email) throws SQLException {
     String sql = "SELECT p.idpessoa, p.nome, p.senha, pr.email " +
                  "FROM pessoa p JOIN professor pr ON pr.pessoa_idpessoa = p.idpessoa " +
                  "WHERE pr.email = ?";
