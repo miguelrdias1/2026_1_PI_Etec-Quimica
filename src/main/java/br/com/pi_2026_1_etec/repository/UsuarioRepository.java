@@ -32,10 +32,10 @@ public class UsuarioRepository {
                 if (chave.next()) {
                     int idPessoa = chave.getInt(1);
 
-                    try (PreparedStatement psAluno = con.prepareStatement(sqlAluno)) {
-                        psAluno.setInt(1, idPessoa);
-                        psAluno.setString(2, usuario.getEmail());
-                        psAluno.executeUpdate();
+                    try (PreparedStatement psPerfil = con.prepareStatement(sqlPerfil)) {
+                        psPerfil.setInt(1, idPessoa);
+                        psPerfil.setString(2, usuario.getEmail());
+                        psPerfil.executeUpdate();
                     }
                 }
             }
