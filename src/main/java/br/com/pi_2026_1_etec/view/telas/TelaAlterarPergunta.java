@@ -86,11 +86,12 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
-        jButtonAlterarImagem = new javax.swing.JButton();
         jButtonRemoverImagem = new javax.swing.JButton();
         jLabelImagem = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
+        jButtonAlterarImagem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -198,12 +199,6 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 25, 19)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButtonAlterarImagem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonAlterarImagem.setText("Alterar imagem");
-        jButtonAlterarImagem.setToolTipText("");
-        jButtonAlterarImagem.addActionListener(this::jButtonAlterarImagemActionPerformed);
-        jPanel3.add(jButtonAlterarImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 130, -1));
-
         jButtonRemoverImagem.setBackground(new java.awt.Color(146, 25, 19));
         jButtonRemoverImagem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonRemoverImagem.setForeground(new java.awt.Color(255, 255, 255));
@@ -215,6 +210,10 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jLabelImagem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jPanel3.add(jLabelImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 120, 78));
 
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(this::jComboBox2ActionPerformed);
+        jPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 130, -1));
+
         jButton1.setBackground(new java.awt.Color(146, 25, 19));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -222,6 +221,11 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
 
         jButtonVoltar.setText("Voltar");
         jButtonVoltar.addActionListener(this::jButtonVoltarActionPerformed);
+
+        jButtonAlterarImagem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonAlterarImagem.setText("Alterar imagem");
+        jButtonAlterarImagem.setToolTipText("");
+        jButtonAlterarImagem.addActionListener(this::jButtonAlterarImagemActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -236,7 +240,11 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1))
-                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonAlterarImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54))
                             .addComponent(jPanelAlternativaA, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
                             .addComponent(jPanelAlternativaB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanelAlternativaC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -267,10 +275,15 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(84, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17)
-                .addComponent(jLabel3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAlterarImagem)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelAlternativaA, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
@@ -283,7 +296,7 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 460));
@@ -344,6 +357,17 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         new TelaGerenciamentoDePergunta().setVisible(true); // Exibe o que foi criado. Nesse caso, o objeto TelaGerenciamentoPergunta
         this.dispose(); // Método dispose encerra e destrói a janela de forma segura
     }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        Object itemSelecionado = jComboBox2.getSelectedItem();
+        if(itemSelecionado == null) {
+        //jlabelImagem.setIcon(null);
+        //jlabelImagem.setText("Imagem");
+        return;
+    }
+            
+    
+    }//GEN-LAST:event_jComboBox2ActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -364,7 +388,7 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaAlterarPergunta(1).setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new TelaAlterarPergunta(1).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -377,6 +401,7 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRemoverImagem;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
