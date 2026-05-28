@@ -73,7 +73,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="22" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ol&#xe1;, Professor(a) Carlos!"/>
+                <Property name="text" type="java.lang.String" value="Ol&#xe1;, Professor(a)!"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -445,7 +445,7 @@
             <Component class="javax.swing.JButton" name="jButtonLogout">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="13" green="19" red="92" type="rgb"/>
+                  <Color blue="c" green="10" red="c3" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
@@ -460,7 +460,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="690" y="10" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="690" y="10" width="-1" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>

@@ -63,7 +63,7 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
 
         jLabelTitulo.setBackground(new java.awt.Color(248, 249, 252));
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jLabelTitulo.setText("Olá, Professor(a) Carlos!");
+        jLabelTitulo.setText("Olá, Professor(a)!");
         jPanel1.add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabelSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -236,12 +236,12 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 54, -1, -1));
 
-        jButtonLogout.setBackground(new java.awt.Color(146, 25, 19));
+        jButtonLogout.setBackground(new java.awt.Color(195, 16, 12));
         jButtonLogout.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonLogout.setForeground(new java.awt.Color(255, 255, 255));
         jButtonLogout.setText("Logout");
         jButtonLogout.addActionListener(this::jButtonLogoutActionPerformed);
-        jPanel1.add(jButtonLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
+        jPanel1.add(jButtonLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, 30));
 
         jLayeredPane1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 775, 460));
 
