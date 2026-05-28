@@ -2,6 +2,7 @@ package br.com.pi_2026_1_etec.view.telas;
 
 import br.com.pi_2026_1_etec.repository.UsuarioRepository;
 import br.com.pi_2026_1_etec.model.Usuario;
+import br.com.pi_2026_1_etec.model.Sessao;
 
 public class TelaLogin extends javax.swing.JFrame {
     
@@ -179,16 +180,18 @@ public class TelaLogin extends javax.swing.JFrame {
 
         Usuario aluno = repository.buscarAlunoPorEmail(email); // Busca o aluno pelo e-mail através do método buscarAlunoPorEmail criado na classe UsuarioRepository
         if (aluno != null && aluno.getSenha().equals(senha)) { // Compara a senha e decide o que fazer
-            new TelaMenuAlunos().setVisible(true);
-            this.dispose();
-            return;
+        Sessao.login(aluno); 
+        new TelaMenuAlunos().setVisible(true);
+        this.dispose();
+        return;
         }
 
         Usuario professor = repository.buscarProfessorPorEmail(email);
         if (professor != null && professor.getSenha().equals(senha)) {
-            new TelaMenuProfessores().setVisible(true);
-            this.dispose();
-            return;
+        Sessao.login(professor); // 🔑 salva o usuário logado
+        new TelaMenuProfessores().setVisible(true);
+        this.dispose();
+        return;
         }
 
         javax.swing.JOptionPane.showMessageDialog(this, "E-mail ou senha incorretos.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);

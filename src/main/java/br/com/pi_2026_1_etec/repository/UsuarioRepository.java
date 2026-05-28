@@ -12,6 +12,12 @@ public class UsuarioRepository {
     public void cadastrar(Usuario usuario) throws Exception {
         String sqlPessoa = "INSERT INTO pessoa (nome, senha) VALUES (?, ?)";
         String sqlAluno = "INSERT INTO aluno (pessoa_idpessoa, email) VALUES (?, ?)";
+        String sqlProfessor = "INSERT INTO professor (pessoa_idpessoa, email) VALUES (?, ?)";
+        
+        boolean isProfessor = usuario.getEmail().endsWith("@cps.sp.gov.br")
+                   && !usuario.getEmail().endsWith("@aluno.cps.sp.gov.br");
+
+        String sqlPerfil = isProfessor ? sqlProfessor : sqlAluno;
 
         try (Connection con = ConexaoBD.obterConexao()) {
             con.setAutoCommit(false);

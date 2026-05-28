@@ -3,6 +3,8 @@ package br.com.pi_2026_1_etec.view.telas;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import javax.swing.JOptionPane;
+import br.com.pi_2026_1_etec.model.Sessao;
 
 
 public class TelaMenuAlunos extends javax.swing.JFrame {
@@ -12,6 +14,12 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
     
     public TelaMenuAlunos() {
         initComponents();
+        
+        if (!Sessao.estaLogado()) {
+            JOptionPane.showMessageDialog(this, "Faça login para acessar.");
+            new TelaLogin().setVisible(true);
+            this.dispose();
+        }
         
     }
 
@@ -127,7 +135,9 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFacilActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        Sessao.logout();                 
+        new TelaLogin().setVisible(true); 
+        this.dispose(); 
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRandomActionPerformed
