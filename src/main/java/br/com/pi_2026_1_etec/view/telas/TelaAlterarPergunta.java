@@ -35,12 +35,7 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         while (rs.next()) {
             int id = rs.getInt("id_material");
             String nome = rs.getString("nome");
-<<<<<<< HEAD
-            String caminho = rs.getString("caminho"); 
-=======
-            String caminho = rs.getString("caminho_imagem"); 
->>>>>>> 1387b832a87215fa87827e6cba3c4dd6237e8504
-            
+            String caminho = rs.getString("caminho_imagem");
             
             Material mat = new Material(id, nome, caminho);
       
