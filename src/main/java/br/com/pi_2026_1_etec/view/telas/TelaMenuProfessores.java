@@ -29,7 +29,6 @@ public class TelaMenuProfessores extends javax.swing.JFrame {
         int total = alunoDAO.contarAlunosAtivos();
         jLabelSubtitulo2.setText("Alunos ativos: " + total);
     }
-   @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

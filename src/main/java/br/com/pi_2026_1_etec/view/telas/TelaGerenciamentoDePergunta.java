@@ -20,11 +20,8 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         jComboBoxDificuldade.addItem("Difícil");
     } 
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        jSpinner1 = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jPanelPesquisar = new javax.swing.JPanel();
         jTextFieldPesquisarPergunta = new javax.swing.JTextField();
@@ -258,6 +255,7 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         String texto = jTextFieldPesquisarPergunta.getText();
         String tema = jComboBoxTema.getSelectedItem().toString();
         String dificuldade = jComboBoxDificuldade.getSelectedItem().toString();
+        aplicarFiltro(texto, tema, dificuldade);
     }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
@@ -281,6 +279,12 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
     private void jComboBoxDificuldadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDificuldadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxDificuldadeActionPerformed
+
+    private void aplicarFiltro(String texto, String tema, String dificuldade) {
+        // TODO: implementar filtro real. Por enquanto apenas registra os valores.
+        // System.out.println pode ser útil para debug local.
+        System.out.println("Filtro: " + texto + ", " + tema + ", " + dificuldade);
+    }
 
     /**
      * @param args the command line arguments
@@ -332,7 +336,6 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField jTextFieldPesquisarPergunta;
     // End of variables declaration//GEN-END:variables
 }

@@ -31,7 +31,6 @@ public class TelaGerenciarAlunos extends javax.swing.JFrame {
         carregarAlunos();
     }
 
-    @SuppressWarnings("unchecked")
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();

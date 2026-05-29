@@ -1,9 +1,6 @@
 package br.com.pi_2026_1_etec.view.telas;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 
 import br.com.pi_2026_1_etec.model.Sessao;
 
@@ -22,7 +19,6 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
 
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
