@@ -1,5 +1,8 @@
 package br.com.pi_2026_1_etec.view.telas;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+
 public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = 
@@ -10,6 +13,12 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
 
         setSize(775, 470);
         setLocationRelativeTo(null);
+        
+        carregarPerguntas();
+        
+        jTablePerguntas.getColumnModel().getColumn(3).setMinWidth(0);
+        jTablePerguntas.getColumnModel().getColumn(3).setMaxWidth(0);
+        jTablePerguntas.getColumnModel().getColumn(3).setPreferredWidth(0);
     }        
    
     private void carregarFiltros() {
@@ -21,35 +30,43 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         jComboBoxDificuldade.addItem("Fácil");
         jComboBoxDificuldade.addItem("Médio");
         jComboBoxDificuldade.addItem("Difícil");
-} 
+    } 
+    
+    private void carregarPerguntas() {
+        DefaultTableModel model = (DefaultTableModel) jTablePerguntas.getModel();
+        model.setRowCount(0); 
+
+        model.addRow(new Object[]{
+            "Qual é a função do material mostrado na imagem?",
+            "Difícil",
+            "26/05/2026 14:30",
+            1
+        });
+
+        model.addRow(new Object[]{
+            "O que é um sistema operacional?",
+            "Fácil",
+            "20/05/2026 09:10",
+            2
+        });
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        jSpinner1 = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jPanelPesquisar = new javax.swing.JPanel();
         jTextFieldPesquisarPergunta = new javax.swing.JTextField();
         jButtonFiltrar = new javax.swing.JButton();
         jComboBoxTema = new javax.swing.JComboBox<>();
         jComboBoxDificuldade = new javax.swing.JComboBox<>();
-        jPanel6 = new javax.swing.JPanel();
-        jPanelListaPerguntas = new javax.swing.JPanel();
-        jLabelPergunta = new javax.swing.JLabel();
-        jLabelDificuldade = new javax.swing.JLabel();
-        jLabelCriadoEm = new javax.swing.JLabel();
-        jLabelAcoes = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jButtonEdit = new javax.swing.JButton();
-        jSeparator6 = new javax.swing.JSeparator();
-        jSeparator7 = new javax.swing.JSeparator();
-        jSeparator8 = new javax.swing.JSeparator();
         jScrollBar1 = new javax.swing.JScrollBar();
         jButtonVoltar = new javax.swing.JButton();
         jButtonAdicionarPergunta = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTablePerguntas = new javax.swing.JTable();
+        jButtonEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,120 +121,6 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanelPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 365, 80));
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 25, 19)));
-        jPanel6.setForeground(new java.awt.Color(146, 25, 19));
-
-        jPanelListaPerguntas.setBackground(new java.awt.Color(146, 25, 19));
-
-        jLabelPergunta.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelPergunta.setText("Pergunta");
-
-        jLabelDificuldade.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelDificuldade.setText("Dificuldade");
-
-        jLabelCriadoEm.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelCriadoEm.setText("Criado em");
-
-        jLabelAcoes.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelAcoes.setText("Ações");
-
-        javax.swing.GroupLayout jPanelListaPerguntasLayout = new javax.swing.GroupLayout(jPanelListaPerguntas);
-        jPanelListaPerguntas.setLayout(jPanelListaPerguntasLayout);
-        jPanelListaPerguntasLayout.setHorizontalGroup(
-            jPanelListaPerguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelListaPerguntasLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabelPergunta)
-                .addGap(169, 169, 169)
-                .addComponent(jLabelDificuldade)
-                .addGap(104, 104, 104)
-                .addComponent(jLabelCriadoEm, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelAcoes)
-                .addGap(44, 44, 44))
-        );
-        jPanelListaPerguntasLayout.setVerticalGroup(
-            jPanelListaPerguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelListaPerguntasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelListaPerguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPergunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelDificuldade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelCriadoEm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jLabel5.setText("Qual é a função do materia mostrado na imagem?");
-
-        jLabel6.setBackground(new java.awt.Color(255, 102, 102));
-        jLabel6.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel6.setText("Difícil");
-        jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel7.setText("26/05/2026");
-
-        jLabel8.setText("14:30");
-
-        jButtonEdit.setText("edit");
-        jButtonEdit.addActionListener(this::jButtonEditActionPerformed);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelListaPerguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSeparator1)
-            .addComponent(jSeparator5)
-            .addComponent(jSeparator6)
-            .addComponent(jSeparator7)
-            .addComponent(jSeparator8)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel6)
-                        .addGap(115, 115, 115)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jPanelListaPerguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jButtonEdit))
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 720, 320));
         jPanel2.add(jScrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, -1, 320));
 
         jButtonVoltar.setText("Voltar");
@@ -230,6 +133,25 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         jButtonAdicionarPergunta.setText("Adicionar nova pergunta");
         jButtonAdicionarPergunta.addActionListener(this::jButtonAdicionarPerguntaActionPerformed);
         jPanel2.add(jButtonAdicionarPergunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, -1, 30));
+
+        jTablePerguntas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Pergunta", "Dificuldade", "Criado em", "ID"
+            }
+        ));
+        jScrollPane2.setViewportView(jTablePerguntas);
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 720, 290));
+
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(this::jButtonEditarActionPerformed);
+        jPanel2.add(jButtonEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 420, 60, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,12 +181,9 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
         String tema = jComboBoxTema.getSelectedItem().toString();
         String dificuldade = jComboBoxDificuldade.getSelectedItem().toString();
         aplicarFiltro(texto, tema, dificuldade);
+        
+        carregarPerguntas(); 
     }//GEN-LAST:event_jButtonFiltrarActionPerformed
-
-    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
-        new TelaAlterarPergunta(1).setVisible(true); // Exibe o que foi criado. Nesse caso, o objeto TelaAlterarPergunta
-        this.dispose(); // Método dispose encerra e destrói a janela de forma segura
-    }//GEN-LAST:event_jButtonEditActionPerformed
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         new TelaMenuProfessores().setVisible(true); // Exibe o que foi criado. Nesse caso, o objeto TelaMenuProfessores
@@ -283,6 +202,21 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
     private void jComboBoxDificuldadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDificuldadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxDificuldadeActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        int linha = jTablePerguntas.getSelectedRow();
+
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione uma pergunta.");
+            return;
+        }
+
+        int idPergunta = (int) jTablePerguntas.getValueAt(linha, 3);
+
+        TelaAlterarPergunta tela = new TelaAlterarPergunta(idPergunta);
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void aplicarFiltro(String texto, String tema, String dificuldade) {
         // TODO: implementar filtro real. Por enquanto apenas registra os valores.
@@ -317,29 +251,17 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionarPergunta;
-    private javax.swing.JButton jButtonEdit;
+    private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonFiltrar;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBoxDificuldade;
     private javax.swing.JComboBox<String> jComboBoxTema;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabelAcoes;
-    private javax.swing.JLabel jLabelCriadoEm;
-    private javax.swing.JLabel jLabelDificuldade;
-    private javax.swing.JLabel jLabelPergunta;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanelListaPerguntas;
     private javax.swing.JPanel jPanelPesquisar;
     private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTable jTablePerguntas;
     private javax.swing.JTextField jTextFieldPesquisarPergunta;
     // End of variables declaration//GEN-END:variables
 }
