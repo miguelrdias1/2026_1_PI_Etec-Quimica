@@ -62,10 +62,10 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jPanel3" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jPanel3" min="-2" pref="331" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -154,7 +154,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTextFieldEditarPergunta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -171,7 +171,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextField" name="jTextFieldEditarPergunta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Qual a fun&#xe7;&#xe3;o do material mostrado na imagem?"/>
+                <Property name="text" type="java.lang.String" value="Editar pergunta..."/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -368,11 +368,10 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Dificuldade"/>
-                <StringItem index="1" value="F&#xe1;cil"/>
-                <StringItem index="2" value="M&#xe9;dio"/>
-                <StringItem index="3" value="Dif&#xed;cil"/>
+              <StringArray count="3">
+                <StringItem index="0" value="F&#xe1;cil"/>
+                <StringItem index="1" value="M&#xe9;dio"/>
+                <StringItem index="2" value="Dif&#xed;cil"/>
               </StringArray>
             </Property>
           </Properties>

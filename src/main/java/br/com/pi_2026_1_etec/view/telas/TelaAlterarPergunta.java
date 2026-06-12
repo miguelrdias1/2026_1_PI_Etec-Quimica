@@ -69,49 +69,60 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
     
     private void carregarDadosDaPergunta(int idPergunta) {
 
-        String sql = """
-            SELECT 
-                p.enunciado,
-                p.dificuldade,
-                p.id_material,
-                aA.texto AS alternativaA,
-                aB.texto AS alternativaB,
-                aC.texto AS alternativaC,
-                aD.texto AS alternativaD
-            FROM pergunta p
-            JOIN alternativa aA ON aA.id_pergunta = p.id_pergunta AND aA.letra = 'A'
-            JOIN alternativa aB ON aB.id_pergunta = p.id_pergunta AND aB.letra = 'B'
-            JOIN alternativa aC ON aC.id_pergunta = p.id_pergunta AND aC.letra = 'C'
-            JOIN alternativa aD ON aD.id_pergunta = p.id_pergunta AND aD.letra = 'D'
-            WHERE p.id_pergunta = ?
-        """;
+    System.out.println(">>> ID recebido: " + idPergunta);
 
-        try (
-            java.sql.Connection conn = br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao();
-            java.sql.PreparedStatement ps = conn.prepareStatement(sql)
-        ){
+    java.sql.Connection conn = null;
+    java.sql.PreparedStatement ps = null;
+    java.sql.ResultSet rs = null;
 
-            ps.setInt(1, idPergunta);
-            java.sql.ResultSet rs = ps.executeQuery();
+    try {
+        conn = br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao();
 
-            if (rs.next()) {
+        // Carrega o texto da pergunta
+        ps = conn.prepareStatement(
+            "SELECT p.texto AS enunciado, nv.nome AS dificuldade, p.id_material " +
+            "FROM pergunta p " +
+            "LEFT JOIN nivel nv ON p.id_nivel = nv.id_nivel " +
+            "WHERE p.id_pergunta = ?"
+        );
+        ps.setInt(1, idPergunta);
+        rs = ps.executeQuery();
 
-                jTextFieldEditarPergunta.setText(rs.getString("enunciado"));
-
-                jTextField1.setText(rs.getString("alternativaA"));
-                jTextField2.setText(rs.getString("alternativaB"));
-                jTextField3.setText(rs.getString("alternativaC"));
-                jTextField4.setText(rs.getString("alternativaD"));
-
-                jComboBox1.setSelectedItem(rs.getString("dificuldade"));
-
-                int idMaterial = rs.getInt("id_material");
-                selecionarMaterialNoCombo(idMaterial);
-            }
-
-        } catch (Exception e) {
-            System.out.println("Erro ao carregar dados da pergunta: " + e.getMessage());
+        if (rs.next()) {
+            System.out.println(">>> Encontrou: " + rs.getString("enunciado"));
+            jTextFieldEditarPergunta.setText(rs.getString("enunciado"));
+            jComboBox1.setSelectedItem(rs.getString("dificuldade"));
+            selecionarMaterialNoCombo(rs.getInt("id_material"));
+        } else {
+            System.out.println(">>> Pergunta nao encontrada.");
+            return;
         }
+
+        rs.close();
+        ps.close();
+
+        // Carrega as alternativas
+        ps = conn.prepareStatement(
+            "SELECT texto FROM alternativa WHERE id_pergunta = ? ORDER BY id_alternativa"
+        );
+        ps.setInt(1, idPergunta);
+        rs = ps.executeQuery();
+
+        javax.swing.JTextField[] campos = {jTextField1, jTextField2, jTextField3, jTextField4};
+        int i = 0;
+        while (rs.next() && i < 4) {
+            campos[i].setText(rs.getString("texto"));
+            i++;
+        }
+        System.out.println(">>> Alternativas carregadas: " + i);
+
+    } catch (Exception e) {
+        System.out.println(">>> ERRO: " + e.getMessage());
+    } finally {
+        try { if (rs != null) rs.close(); } catch (Exception e) { }
+        try { if (ps != null) ps.close(); } catch (Exception e) { }
+        try { if (conn != null) conn.close(); } catch (Exception e) { }
+    }
     }
     
     private void selecionarMaterialNoCombo(int idMaterial) {
@@ -125,8 +136,7 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
                 }
             }
         }
-    }
-    
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -171,7 +181,7 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 25, 19)));
 
-        jTextFieldEditarPergunta.setText("Qual a função do material mostrado na imagem?");
+        jTextFieldEditarPergunta.setText("Editar pergunta...");
         jTextFieldEditarPergunta.setBorder(null);
         jTextFieldEditarPergunta.addActionListener(this::jTextFieldEditarPerguntaActionPerformed);
 
@@ -182,7 +192,7 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextFieldEditarPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +247,7 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jPanelAlternativaD.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 7, -1, -1));
         jPanelAlternativaD.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 3, 660, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dificuldade", "Fácil", "Médio", "Difícil" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fácil", "Médio", "Difícil" }));
         jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -291,9 +301,9 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButtonVoltar)))
