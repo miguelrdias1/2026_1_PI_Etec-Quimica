@@ -25,10 +25,12 @@ public class TelaGerenciamentoDePergunta extends javax.swing.JFrame {
     }        
    
     private void carregarFiltros() {
+        jComboBoxTema.removeAllItems();
         jComboBoxTema.addItem("Todos");
         jComboBoxTema.addItem("Sistema");
         jComboBoxTema.addItem("Material");
 
+        jComboBoxDificuldade.removeAllItems();
         jComboBoxDificuldade.addItem("Todas");
         jComboBoxDificuldade.addItem("Fácil");
         jComboBoxDificuldade.addItem("Médio");
