@@ -38,20 +38,20 @@ public class PerguntaDAO {
     }
 
     public void inserir(Pergunta p) throws SQLException {
-        String sql = "INSERT INTO pergunta (texto, id_imagem, id_tema, id_material, id_nivel, id_sistema, tipo_pergunta) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pergunta (id_pergunta, texto, id_imagem, id_tema, id_material, id_nivel, id_sistema, tipo_pergunta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection con = ConexaoBD.obterConexao();
-             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, p.getTexto());
-            ps.setInt(2, p.getIdImagem());
-            ps.setInt(3, p.getIdTema());
-            ps.setInt(4, p.getIdMaterial());
-            ps.setInt(5, p.getIdNivel());
-            ps.setInt(6, p.getIdSistema());
-            ps.setString(7, p.getTipoPergunta());
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            int proximoId = obterProximoIdPergunta(con);
+            ps.setInt(1, proximoId);
+            ps.setString(2, p.getTexto());
+            ps.setInt(3, p.getIdImagem());
+            ps.setInt(4, p.getIdTema());
+            ps.setInt(5, p.getIdMaterial());
+            ps.setInt(6, p.getIdNivel());
+            ps.setInt(7, p.getIdSistema());
+            ps.setString(8, p.getTipoPergunta());
             ps.executeUpdate();
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) p.setIdPergunta(rs.getInt(1));
-            }
+            p.setIdPergunta(proximoId);
         }
     }
 
@@ -127,4 +127,13 @@ public class PerguntaDAO {
         p.setTipoPergunta(rs.getString("tipo_pergunta"));
         return p;
     }
-}
+    private int obterProximoIdPergunta(Connection con) throws SQLException {
+        String sql = "SELECT COALESCE(MAX(id_pergunta), 0) + 1 AS proximo_id FROM pergunta";
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("proximo_id");
+            }
+        }
+        return 1;
+    }}

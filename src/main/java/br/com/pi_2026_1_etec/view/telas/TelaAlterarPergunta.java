@@ -433,48 +433,63 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         }
 
         if (idPergunta == 0) {
-            salvarNovaPergunta(enunciado, altA, altB, altC, altD, dificuldade);
+            try {
+                salvarNovaPergunta(enunciado, altA, altB, altC, altD, dificuldade);
+            } catch (java.sql.SQLException e) {
+                javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Erro ao salvar: " + e.getMessage(),
+                    "Erro",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
         } else {
             atualizarPergunta(enunciado, altA, altB, altC, altD, dificuldade);
         }
     }
     
     private void salvarNovaPergunta(String enunciado, String altA, String altB,
-                                String altC, String altD, String dificuldade) {
+                                String altC, String altD, String dificuldade) throws java.sql.SQLException {
 
         String sqlPergunta =
-            "INSERT INTO pergunta (enunciado, dificuldade, id_material) VALUES (?, ?, ?)";
+            "INSERT INTO pergunta (id_pergunta, texto, id_imagem, id_tema, id_material, id_nivel, id_sistema, tipo_pergunta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         String sqlAlternativa =
-            "INSERT INTO alternativa (id_pergunta, letra, texto) VALUES (?, ?, ?)";
+            "INSERT INTO alternativa (id_alternativa, texto, correta, errada, id_imagem, id_pergunta) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (java.sql.Connection conn =
                 br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao()) {
 
             conn.setAutoCommit(false);
 
-            int novoId;
+            int novoId = obterProximoIdPergunta(conn);
+            Integer idNivel = obterIdNivelPorDificuldade(dificuldade);
+            if (idNivel == null) {
+                throw new java.sql.SQLException("Nível não encontrado: " + dificuldade);
+            }
 
             try (java.sql.PreparedStatement ps =
-                    conn.prepareStatement(
-                        sqlPergunta,
-                        java.sql.Statement.RETURN_GENERATED_KEYS)) {
+                    conn.prepareStatement(sqlPergunta)) {
 
-                ps.setString(1, enunciado);
-                ps.setString(2, dificuldade);
+                ps.setInt(1, novoId);
+                ps.setString(2, enunciado);
+                ps.setNull(3, java.sql.Types.INTEGER); // id_imagem
 
                 Object itemSelecionado = jComboBox2.getSelectedItem();
+                Integer idTema = obterIdTemaPadrao(itemSelecionado instanceof Material ? "Material" : "Sistema");
+                ps.setInt(4, idTema);
+
                 if (itemSelecionado instanceof Material material) {
-                    ps.setInt(3, material.getId());
+                    ps.setInt(5, material.getId());
                 } else {
-                    ps.setNull(3, java.sql.Types.INTEGER);
+                    ps.setNull(5, java.sql.Types.INTEGER);
                 }
+
+                ps.setInt(6, idNivel);
+                ps.setNull(7, java.sql.Types.INTEGER); // id_sistema
+                ps.setString(8, "Múltipla escolha");
 
                 ps.executeUpdate();
-
-                try (java.sql.ResultSet rs = ps.getGeneratedKeys()) {
-                    rs.next();
-                    novoId = rs.getInt(1);
-                }
             }
 
             String[][] alternativas = {
@@ -484,13 +499,17 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
                 {"D", altD}
             };
 
+            int altId = obterProximoIdAlternativa(conn);
             try (java.sql.PreparedStatement ps =
                     conn.prepareStatement(sqlAlternativa)) {
 
                 for (String[] alt : alternativas) {
-                    ps.setInt(1, novoId);
-                    ps.setString(2, alt[0]);
-                    ps.setString(3, alt[1]);
+                    ps.setInt(1, altId++);
+                    ps.setString(2, alt[1]);
+                    ps.setInt(3, 0); // correta
+                    ps.setInt(4, 0); // errada
+                    ps.setNull(5, java.sql.Types.INTEGER); // id_imagem
+                    ps.setInt(6, novoId);
                     ps.addBatch();
                 }
                 ps.executeBatch();
@@ -515,13 +534,93 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         }
     }
     
+    private Integer obterIdNivelPorDificuldade(String dificuldade) throws java.sql.SQLException {
+        String sql = "SELECT id_nivel FROM nivel WHERE nome = ?";
+        try (java.sql.Connection conn = br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao();
+             java.sql.PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, dificuldade);
+            try (java.sql.ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id_nivel");
+                }
+            }
+        }
+        return null;
+    }
+
+    private Integer obterIdTemaPorNome(String nome) throws java.sql.SQLException {
+        String sql = "SELECT id_tema FROM tema WHERE nome = ?";
+        try (java.sql.Connection conn = br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao();
+             java.sql.PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nome);
+            try (java.sql.ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id_tema");
+                }
+            }
+        }
+        return null;
+    }
+
+    private Integer obterPrimeiroIdTema() throws java.sql.SQLException {
+        String sql = "SELECT id_tema FROM tema LIMIT 1";
+        try (java.sql.Connection conn = br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao();
+             java.sql.PreparedStatement ps = conn.prepareStatement(sql);
+             java.sql.ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("id_tema");
+            }
+        }
+        return null;
+    }
+
+    private Integer obterIdTemaPadrao(String nomePreferido) {
+        try {
+            Integer idTema = obterIdTemaPorNome(nomePreferido);
+            if (idTema != null) {
+                return idTema;
+            }
+            idTema = obterPrimeiroIdTema();
+            if (idTema != null) {
+                return idTema;
+            }
+        } catch (java.sql.SQLException e) {
+            System.out.println("Não foi possível buscar id_tema: " + e.getMessage());
+        }
+        return 1;
+    }
+
+    private int obterProximoIdPergunta(java.sql.Connection conn) throws java.sql.SQLException {
+        String sql = "SELECT COALESCE(MAX(id_pergunta), 0) + 1 AS proximo_id FROM pergunta";
+        try (java.sql.PreparedStatement ps = conn.prepareStatement(sql);
+             java.sql.ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("proximo_id");
+            }
+        }
+        return 1;
+    }
+
+    private int obterProximoIdAlternativa(java.sql.Connection conn) throws java.sql.SQLException {
+        String sql = "SELECT COALESCE(MAX(id_alternativa), 0) + 1 AS proximo_id FROM alternativa";
+        try (java.sql.PreparedStatement ps = conn.prepareStatement(sql);
+             java.sql.ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("proximo_id");
+            }
+        }
+        return 1;
+    }
+
     private void atualizarPergunta(String enunciado, String altA, String altB,
                                String altC, String altD, String dificuldade) {
 
     String sqlPergunta =
-        "UPDATE pergunta SET enunciado = ?, dificuldade = ?, id_material = ? WHERE id_pergunta = ?";
+        "UPDATE pergunta SET texto = ?, id_imagem = ?, id_tema = ?, id_material = ?, id_nivel = ?, id_sistema = ?, tipo_pergunta = ? WHERE id_pergunta = ?";
+    String sqlAlternativaDelete =
+        "DELETE FROM alternativa WHERE id_pergunta = ?";
     String sqlAlternativa =
-        "UPDATE alternativa SET texto = ? WHERE id_pergunta = ? AND letra = ?";
+        "INSERT INTO alternativa (id_alternativa, texto, correta, errada, id_imagem, id_pergunta) VALUES (?, ?, ?, ?, ?, ?)";
 
     try (java.sql.Connection conn =
              br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao()) {
@@ -532,16 +631,27 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
                  conn.prepareStatement(sqlPergunta)) {
 
             ps.setString(1, enunciado);
-            ps.setString(2, dificuldade);
+            ps.setNull(2, java.sql.Types.INTEGER); // id_imagem
 
             Object itemSelecionado = jComboBox2.getSelectedItem();
+            Integer idTema = obterIdTemaPadrao(itemSelecionado instanceof Material ? "Material" : "Sistema");
+            ps.setInt(3, idTema);
+
             if (itemSelecionado instanceof Material material) {
-                ps.setInt(3, material.getId());
+                ps.setInt(4, material.getId());
             } else {
-                ps.setNull(3, java.sql.Types.INTEGER);
+                ps.setNull(4, java.sql.Types.INTEGER);
             }
 
-            ps.setInt(4, idPergunta);
+            Integer idNivel = obterIdNivelPorDificuldade(dificuldade);
+            if (idNivel == null) {
+                throw new java.sql.SQLException("Nível não encontrado: " + dificuldade);
+            }
+            ps.setInt(5, idNivel);
+            ps.setNull(6, java.sql.Types.INTEGER); // id_sistema
+            ps.setString(7, "Múltipla escolha");
+
+            ps.setInt(8, idPergunta);
             ps.executeUpdate();
         }
 
@@ -553,12 +663,22 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         };
 
         try (java.sql.PreparedStatement ps =
+                 conn.prepareStatement(sqlAlternativaDelete)) {
+            ps.setInt(1, idPergunta);
+            ps.executeUpdate();
+        }
+
+        int altId = obterProximoIdAlternativa(conn);
+        try (java.sql.PreparedStatement ps =
                  conn.prepareStatement(sqlAlternativa)) {
 
             for (String[] alt : alternativas) {
-                ps.setString(1, alt[1]);
-                ps.setInt(2, idPergunta);
-                ps.setString(3, alt[0]);
+                ps.setInt(1, altId++);
+                ps.setString(2, alt[1]);
+                ps.setInt(3, 0); // correta
+                ps.setInt(4, 0); // errada
+                ps.setNull(5, java.sql.Types.INTEGER); // id_imagem
+                ps.setInt(6, idPergunta);
                 ps.addBatch();
             }
             ps.executeBatch();

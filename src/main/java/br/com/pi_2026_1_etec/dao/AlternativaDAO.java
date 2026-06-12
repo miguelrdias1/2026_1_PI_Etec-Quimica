@@ -10,18 +10,18 @@ import java.util.List;
 public class AlternativaDAO {
 
     public void inserir(Alternativa a) throws SQLException {
-        String sql = "INSERT INTO alternativa (texto, correta, errada, id_imagem, id_pergunta) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO alternativa (id_alternativa, texto, correta, errada, id_imagem, id_pergunta) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection con = ConexaoBD.obterConexao();
-             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, a.getTexto());
-            ps.setInt(2, a.isCorreta() ? 1 : 0);
-            ps.setInt(3, a.isErrada() ? 1 : 0);
-            ps.setInt(4, a.getIdImagem());
-            ps.setInt(5, a.getIdPergunta());
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            int proximoId = obterProximoIdAlternativa(con);
+            a.setIdAlternativa(proximoId);
+            ps.setInt(1, proximoId);
+            ps.setString(2, a.getTexto());
+            ps.setInt(3, a.isCorreta() ? 1 : 0);
+            ps.setInt(4, a.isErrada() ? 1 : 0);
+            ps.setInt(5, a.getIdImagem());
+            ps.setInt(6, a.getIdPergunta());
             ps.executeUpdate();
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) a.setIdAlternativa(rs.getInt(1));
-            }
         }
     }
 
@@ -88,5 +88,16 @@ public class AlternativaDAO {
             ps.setInt(1, idAlternativa);
             ps.executeUpdate();
         }
+    }
+
+    private int obterProximoIdAlternativa(Connection con) throws SQLException {
+        String sql = "SELECT COALESCE(MAX(id_alternativa), 0) + 1 AS proximo_id FROM alternativa";
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("proximo_id");
+            }
+        }
+        return 1;
     }
 }
