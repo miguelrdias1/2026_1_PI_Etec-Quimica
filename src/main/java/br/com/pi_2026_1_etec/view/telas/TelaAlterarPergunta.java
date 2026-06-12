@@ -69,49 +69,53 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
     
     private void carregarDadosDaPergunta(int idPergunta) {
 
-        String sql = """
-            SELECT 
-                p.enunciado,
-                p.dificuldade,
-                p.id_material,
-                aA.texto AS alternativaA,
-                aB.texto AS alternativaB,
-                aC.texto AS alternativaC,
-                aD.texto AS alternativaD
-            FROM pergunta p
-            JOIN alternativa aA ON aA.id_pergunta = p.id_pergunta AND aA.letra = 'A'
-            JOIN alternativa aB ON aB.id_pergunta = p.id_pergunta AND aB.letra = 'B'
-            JOIN alternativa aC ON aC.id_pergunta = p.id_pergunta AND aC.letra = 'C'
-            JOIN alternativa aD ON aD.id_pergunta = p.id_pergunta AND aD.letra = 'D'
-            WHERE p.id_pergunta = ?
-        """;
+    java.sql.Connection conn = null;
+    java.sql.PreparedStatement ps = null;
+    java.sql.ResultSet rs = null;
 
-        try (
-            java.sql.Connection conn = br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao();
-            java.sql.PreparedStatement ps = conn.prepareStatement(sql)
-        ){
+    try {
+        conn = br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao();
 
-            ps.setInt(1, idPergunta);
-            java.sql.ResultSet rs = ps.executeQuery();
+        ps = conn.prepareStatement(
+            "SELECT p.texto AS enunciado, nv.nome AS dificuldade, p.id_material " +
+            "FROM pergunta p " +
+            "LEFT JOIN nivel nv ON p.id_nivel = nv.id_nivel " +
+            "WHERE p.id_pergunta = ?"
+        );
+        ps.setInt(1, idPergunta);
+        rs = ps.executeQuery();
 
-            if (rs.next()) {
-
-                jTextFieldEditarPergunta.setText(rs.getString("enunciado"));
-
-                jTextField1.setText(rs.getString("alternativaA"));
-                jTextField2.setText(rs.getString("alternativaB"));
-                jTextField3.setText(rs.getString("alternativaC"));
-                jTextField4.setText(rs.getString("alternativaD"));
-
-                jComboBox1.setSelectedItem(rs.getString("dificuldade"));
-
-                int idMaterial = rs.getInt("id_material");
-                selecionarMaterialNoCombo(idMaterial);
-            }
-
-        } catch (Exception e) {
-            System.out.println("Erro ao carregar dados da pergunta: " + e.getMessage());
+        if (rs.next()) {
+            jTextFieldEditarPergunta.setText(rs.getString("enunciado"));
+            jComboBox1.setSelectedItem(rs.getString("dificuldade"));
+            selecionarMaterialNoCombo(rs.getInt("id_material"));
+        } else {
+            return;
         }
+
+        rs.close();
+        ps.close();
+
+        ps = conn.prepareStatement(
+            "SELECT texto FROM alternativa WHERE id_pergunta = ? ORDER BY id_alternativa"
+        );
+        ps.setInt(1, idPergunta);
+        rs = ps.executeQuery();
+
+        javax.swing.JTextField[] campos = {jTextField1, jTextField2, jTextField3, jTextField4};
+        int i = 0;
+        while (rs.next() && i < 4) {
+            campos[i].setText(rs.getString("texto"));
+            i++;
+        }
+
+    } catch (Exception e) {
+        System.out.println("Erro ao carregar dados da pergunta: " + e.getMessage());
+    } finally {
+        try { if (rs != null) rs.close(); } catch (Exception e) { }
+        try { if (ps != null) ps.close(); } catch (Exception e) { }
+        try { if (conn != null) conn.close(); } catch (Exception e) { }
+    }
     }
     
     private void selecionarMaterialNoCombo(int idMaterial) {
