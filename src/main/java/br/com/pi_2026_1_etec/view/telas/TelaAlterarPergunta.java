@@ -204,7 +204,6 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jLabel4.setText("A");
         jPanelAlternativaA.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 7, -1, -1));
 
-        jTextField1.setText("Alternativa A");
         jTextField1.addActionListener(this::jTextField1ActionPerformed);
         jPanelAlternativaA.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 3, 660, 30));
 
@@ -216,8 +215,6 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("B");
         jPanelAlternativaB.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 7, -1, -1));
-
-        jTextField2.setText("Alternativa B");
         jPanelAlternativaB.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 3, 660, 30));
 
         jPanelAlternativaC.setBackground(new java.awt.Color(146, 25, 19));
@@ -228,8 +225,6 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("C");
         jPanelAlternativaC.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 7, -1, -1));
-
-        jTextField3.setText("Alternativa C");
         jPanelAlternativaC.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 3, 660, 30));
 
         jPanelAlternativaD.setBackground(new java.awt.Color(146, 25, 19));
@@ -240,8 +235,6 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("D");
         jPanelAlternativaD.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 7, -1, -1));
-
-        jTextField4.setText("Alternativa D");
         jPanelAlternativaD.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 3, 660, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dificuldade", "Fácil", "Médio", "Difícil" }));
@@ -344,10 +337,6 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldEditarPerguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEditarPerguntaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldEditarPerguntaActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -415,6 +404,10 @@ public class TelaAlterarPergunta extends javax.swing.JFrame {
         }
     }           
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jTextFieldEditarPerguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEditarPerguntaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEditarPerguntaActionPerformed
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 
