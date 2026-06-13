@@ -54,9 +54,13 @@ public class TelaQuestao1 extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Resposta incorreta");
         }
     
-        avancarPergunta();
+    }
     
-}
+    private void avancarPergunta() {
+    indiceAtual++;
+    exibirPerguntaAtual();
+    }
+    
 private void jButtonAActionPerformed(java.awt.event.ActionEvent evt) {                                         
     if (alternativasAtuais != null && alternativasAtuais.size() >= 1) {
         verificarResposta(alternativasAtuais.get(0));//botao A->indice da lista 0 (ta organizado na lista pra ficar igual ja)

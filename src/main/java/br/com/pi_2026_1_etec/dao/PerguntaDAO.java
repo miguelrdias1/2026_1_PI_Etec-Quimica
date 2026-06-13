@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 public class PerguntaDAO {
 
     public List<Pergunta> listarPorNivel(int idNivel) throws SQLException {
-        String sql = "SELECT * FROM pergunta WHERE id_nivel = ?";
+        String sql = "SELECT * FROM pergunta WHERE id_nivel = ? ORDER BY RAND() LIMIT 10";
         List<Pergunta> lista = new ArrayList<>();
         try (Connection con = ConexaoBD.obterConexao();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -24,6 +24,19 @@ public class PerguntaDAO {
         }
         return lista;
     }
+    
+    public List<Pergunta> listarAleatorio() throws SQLException {
+    String sql = "SELECT * FROM pergunta ORDER BY RAND() LIMIT 10";
+    List<Pergunta> lista = new ArrayList<>();
+    try (Connection con = ConexaoBD.obterConexao();
+         PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            lista.add(mapear(rs));
+        }
+    }
+    return lista;
+}
 
     public Pergunta buscarPorId(int idPergunta) throws SQLException {
         String sql = "SELECT * FROM pergunta WHERE id_pergunta = ?";

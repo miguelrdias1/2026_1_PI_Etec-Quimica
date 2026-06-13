@@ -1,8 +1,12 @@
 package br.com.pi_2026_1_etec.view.telas;
 
+import br.com.pi_2026_1_etec.dao.PerguntaDAO;
+import br.com.pi_2026_1_etec.model.Pergunta;
 import javax.swing.JOptionPane;
 
 import br.com.pi_2026_1_etec.model.Sessao;
+import java.sql.SQLException;
+import java.util.List;
 
 public class TelaMenuAlunos extends javax.swing.JFrame {
     
@@ -122,11 +126,23 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedioActionPerformed
-        
+        try {
+        PerguntaDAO dao = new PerguntaDAO();
+        List<Pergunta> perguntas = dao.listarPorNivel(2);
+        new TelaQuestao1(perguntas).setVisible(true);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnMedioActionPerformed
 
     private void btnFacilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacilActionPerformed
-       
+         try {
+        PerguntaDAO dao = new PerguntaDAO();
+        List<Pergunta> perguntas = dao.listarPorNivel(1);
+        new TelaQuestao1(perguntas).setVisible(true);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnFacilActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -136,11 +152,23 @@ public class TelaMenuAlunos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRandomActionPerformed
-     
+      try {
+        PerguntaDAO dao = new PerguntaDAO();
+        List<Pergunta> perguntas = dao.listarPorNivel(0);
+        new TelaQuestao1(perguntas).setVisible(true);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnRandomActionPerformed
 
     private void btnDificilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDificilActionPerformed
-       
+        try {
+        PerguntaDAO dao = new PerguntaDAO();
+        List<Pergunta> perguntas = dao.listarPorNivel(3);
+        new TelaQuestao1(perguntas).setVisible(true);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnDificilActionPerformed
 
     
