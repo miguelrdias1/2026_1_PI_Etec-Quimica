@@ -4,258 +4,369 @@ import br.com.pi_2026_1_etec.repository.UsuarioRepository;
 import br.com.pi_2026_1_etec.model.Usuario;
 import br.com.pi_2026_1_etec.model.Sessao;
 
-public class TelaLogin extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
-        
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+
+public class TelaLogin extends JFrame {
+
+    private static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(TelaLogin.class.getName());
+
+    private final Color corPrincipal = new Color(7, 92, 110);
+    private final Color corDestaque = new Color(0, 180, 220);
+
+    private JButton entrar;
+    private JButton jButtonRedirecionamentoCadastro;
+
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JLabel jLabel5;
+    private JLabel jLabel6;
+    private JLabel jLabel7;
+    private JLabel jLabel8;
+    private JLabel jLabelEmail;
+    private JLabel jLabelLogin;
+    private JLabel jLabelMostrarSenha;
+    private JLabel jLabelSenha;
+
+    private JLayeredPane jLayeredPane1;
+
+    private JPanel jPanelFundoAzul;
+    private JPanel jPanelFundoBranco;
+    private JPanel jPanelFundoLogin;
+
+    private JTextField jTextFieldEmail;
+    private JToggleButton mostrarSenha;
+    private JPasswordField txtSenha;
+
     public TelaLogin() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-   
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+
     private void initComponents() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Login");
+        setMinimumSize(new Dimension(950, 550));
+        setResizable(true);
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jPanelFundoBranco = new javax.swing.JPanel();
-        jPanelFundoLogin = new javax.swing.JPanel();
-        jLabelLogin = new javax.swing.JLabel();
-        jLabelEmail = new javax.swing.JLabel();
-        jTextFieldEmail = new javax.swing.JTextField();
-        jLabelSenha = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JPasswordField();
-        mostrarSenha = new javax.swing.JToggleButton();
-        jLabelMostrarSenha = new javax.swing.JLabel();
-        entrar = new javax.swing.JButton();
-        jButtonRedirecionamentoCadastro = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jPanelFundoAzul = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLayeredPane1 = new JLayeredPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanelFundoBranco = new JPanel(new BorderLayout());
+        jPanelFundoBranco.setBackground(Color.WHITE);
 
-        jLayeredPane1.setPreferredSize(new java.awt.Dimension(775, 460));
-        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelFundoAzul = criarPainelLateral();
+        jPanelFundoLogin = criarPainelLogin();
 
-        jPanelFundoBranco.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelFundoBranco.setPreferredSize(new java.awt.Dimension(775, 460));
+        JPanel painelConteudo = new JPanel(new BorderLayout());
+        painelConteudo.setBackground(Color.WHITE);
 
-        jPanelFundoLogin.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelFundoLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanelFundoLogin.setForeground(new java.awt.Color(255, 255, 255));
-        jPanelFundoLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        painelConteudo.add(jPanelFundoAzul, BorderLayout.WEST);
 
-        jLabelLogin.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jLabelLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelLogin.setText("Faça seu login");
-        jLabelLogin.setAlignmentX(170.0F);
-        jLabelLogin.setAlignmentY(160.0F);
-        jPanelFundoLogin.add(jLabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
+        JPanel painelCentro = new JPanel(new GridBagLayout());
+        painelCentro.setBackground(Color.WHITE);
 
-        jLabelEmail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelEmail.setText("E-mail");
-        jPanelFundoLogin.add(jLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
-        jPanelFundoLogin.add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 259, -1));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
 
-        jLabelSenha.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelSenha.setText("Senha");
-        jPanelFundoLogin.add(jLabelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
-        jPanelFundoLogin.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 259, -1));
+        painelCentro.add(jPanelFundoLogin, gbc);
 
-        mostrarSenha.addActionListener(this::mostrarSenhaActionPerformed);
-        jPanelFundoLogin.add(mostrarSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 13, 13));
+        painelConteudo.add(painelCentro, BorderLayout.CENTER);
 
-        jLabelMostrarSenha.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLabelMostrarSenha.setText("Mostrar senha");
-        jPanelFundoLogin.add(jLabelMostrarSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
-
-        entrar.setBackground(new java.awt.Color(7, 92, 110));
-        entrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        entrar.setForeground(new java.awt.Color(255, 255, 255));
-        entrar.setText("Entrar");
-        entrar.addActionListener(this::entrarActionPerformed);
-        jPanelFundoLogin.add(entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 259, -1));
-
-        jButtonRedirecionamentoCadastro.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jButtonRedirecionamentoCadastro.setText("Ainda não possui login? Faça o cadastro aqui");
-        jButtonRedirecionamentoCadastro.setBorder(null);
-        jButtonRedirecionamentoCadastro.addActionListener(this::jButtonRedirecionamentoCadastroActionPerformed);
-        jPanelFundoLogin.add(jButtonRedirecionamentoCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
-
-        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setText("Use suas credenciais para continuar");
-        jPanelFundoLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
-
-        jPanelFundoAzul.setBackground(new java.awt.Color(7, 92, 110));
-        jPanelFundoAzul.setPreferredSize(new java.awt.Dimension(132, 79));
-        jPanelFundoAzul.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 180, 220));
-        jLabel3.setText("O GRANDE");
-        jPanelFundoAzul.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("DESAFIO");
-        jPanelFundoAzul.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 180, 220));
-        jLabel5.setText("DA QUÍMICA");
-        jPanelFundoAzul.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Bem-vindo(a)!");
-        jPanelFundoAzul.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
-
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Entre para acessar a experiência que transforma");
-        jPanelFundoAzul.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
-
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("conhecimento em desafio.");
-        jPanelFundoAzul.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
-        jPanelFundoAzul.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
-
-        javax.swing.GroupLayout jPanelFundoBrancoLayout = new javax.swing.GroupLayout(jPanelFundoBranco);
-        jPanelFundoBranco.setLayout(jPanelFundoBrancoLayout);
-        jPanelFundoBrancoLayout.setHorizontalGroup(
-            jPanelFundoBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFundoBrancoLayout.createSequentialGroup()
-                .addComponent(jPanelFundoAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(jPanelFundoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
-        );
-        jPanelFundoBrancoLayout.setVerticalGroup(
-            jPanelFundoBrancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFundoBrancoLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jPanelFundoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanelFundoBrancoLayout.createSequentialGroup()
-                .addComponent(jPanelFundoAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jLayeredPane1.add(jPanelFundoBranco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 460));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(painelConteudo, BorderLayout.CENTER);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-    String email = jTextFieldEmail.getText(); // Pega o e-mail preenchido no campo
-    String senha = new String(txtSenha.getPassword()); // Pega a senha preenchida no campo
-
-    if (email.isBlank() || senha.isBlank()) { // Verifica se os campos de e-mail e senha estão vazios
-        javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
+        setLocationRelativeTo(null);
     }
-    
-    try { 
-        UsuarioRepository repository = new UsuarioRepository();
 
-        Usuario aluno = repository.buscarAlunoPorEmail(email); // Busca o aluno pelo e-mail através do método buscarAlunoPorEmail criado na classe UsuarioRepository
-        if (aluno != null && aluno.getSenha().equals(senha)) { // Compara a senha e decide o que fazer
-        Sessao.login(aluno); 
-        new TelaMenuAlunos().setVisible(true);
-        this.dispose();
-        return;
+    private JPanel criarPainelLateral() {
+        JPanel painel = new JPanel();
+        painel.setBackground(corPrincipal);
+
+        // Aumentado para o texto não cortar.
+        painel.setPreferredSize(new Dimension(430, 600));
+        painel.setMinimumSize(new Dimension(400, 500));
+
+        painel.setLayout(new GridBagLayout());
+
+        JPanel textos = new JPanel();
+        textos.setOpaque(false);
+        textos.setLayout(new BoxLayout(textos, BoxLayout.Y_AXIS));
+        textos.setBorder(new EmptyBorder(20, 33, 20, 33));
+
+        jLabel3 = new JLabel("O GRANDE");
+        jLabel3.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        jLabel3.setForeground(corDestaque);
+        jLabel3.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        jLabel4 = new JLabel("DESAFIO");
+        jLabel4.setFont(new Font("Segoe UI", Font.BOLD, 38));
+        jLabel4.setForeground(Color.WHITE);
+        jLabel4.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        jLabel5 = new JLabel("DA QUÍMICA");
+        jLabel5.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        jLabel5.setForeground(corDestaque);
+        jLabel5.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        jLabel6 = new JLabel("Bem-vindo(a)!");
+        jLabel6.setFont(new Font("Segoe UI", Font.BOLD, 30));
+        jLabel6.setForeground(Color.WHITE);
+        jLabel6.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        jLabel7 = new JLabel("Entre para acessar a experiência");
+        jLabel7.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+        jLabel7.setForeground(Color.WHITE);
+        jLabel7.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        jLabel8 = new JLabel("que transforma conhecimento em desafio.");
+        jLabel8.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+        jLabel8.setForeground(Color.WHITE);
+        jLabel8.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        jLabel1 = new JLabel();
+
+        textos.add(jLabel3);
+        textos.add(Box.createVerticalStrut(2));
+        textos.add(jLabel4);
+        textos.add(Box.createVerticalStrut(2));
+        textos.add(jLabel5);
+        textos.add(Box.createVerticalStrut(70));
+        textos.add(jLabel6);
+        textos.add(Box.createVerticalStrut(26));
+        textos.add(jLabel7);
+        textos.add(Box.createVerticalStrut(10));
+        textos.add(jLabel8);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        painel.add(textos, gbc);
+
+        return painel;
+    }
+
+    private JPanel criarPainelLogin() {
+        JPanel painel = new JPanel();
+        painel.setBackground(Color.WHITE);
+        painel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(204, 204, 204)),
+                new EmptyBorder(28, 38, 26, 38)
+        ));
+        painel.setPreferredSize(new Dimension(430, 385));
+        painel.setMinimumSize(new Dimension(390, 360));
+        painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
+
+        jLabelLogin = new JLabel("Faça seu login");
+        jLabelLogin.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        jLabelLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        jLabel2 = new JLabel("Use suas credenciais para continuar");
+        jLabel2.setForeground(new Color(153, 153, 153));
+        jLabel2.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        jLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JPanel painelCampos = new JPanel();
+        painelCampos.setOpaque(false);
+        painelCampos.setLayout(new BoxLayout(painelCampos, BoxLayout.Y_AXIS));
+        painelCampos.setAlignmentX(Component.CENTER_ALIGNMENT);
+        painelCampos.setMaximumSize(new Dimension(300, 170));
+        painelCampos.setPreferredSize(new Dimension(300, 170));
+
+        jLabelEmail = criarLabelCampo("E-mail");
+        jTextFieldEmail = criarCampoTexto();
+
+        jLabelSenha = criarLabelCampo("Senha");
+
+        txtSenha = new JPasswordField();
+        txtSenha.setMaximumSize(new Dimension(300, 32));
+        txtSenha.setPreferredSize(new Dimension(300, 32));
+        txtSenha.setAlignmentX(Component.LEFT_ALIGNMENT);
+        txtSenha.setEchoChar('•');
+
+        mostrarSenha = new JToggleButton();
+        mostrarSenha.setPreferredSize(new Dimension(16, 16));
+        mostrarSenha.setMaximumSize(new Dimension(16, 16));
+        mostrarSenha.addActionListener(this::mostrarSenhaActionPerformed);
+
+        jLabelMostrarSenha = new JLabel("Mostrar senha");
+        jLabelMostrarSenha.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+
+        JPanel painelMostrarSenha = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        painelMostrarSenha.setOpaque(false);
+        painelMostrarSenha.setMaximumSize(new Dimension(300, 22));
+        painelMostrarSenha.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelMostrarSenha.add(mostrarSenha);
+        painelMostrarSenha.add(Box.createHorizontalStrut(8));
+        painelMostrarSenha.add(jLabelMostrarSenha);
+
+        painelCampos.add(jLabelEmail);
+        painelCampos.add(Box.createVerticalStrut(6));
+        painelCampos.add(jTextFieldEmail);
+        painelCampos.add(Box.createVerticalStrut(16));
+
+        painelCampos.add(jLabelSenha);
+        painelCampos.add(Box.createVerticalStrut(6));
+        painelCampos.add(txtSenha);
+        painelCampos.add(Box.createVerticalStrut(8));
+        painelCampos.add(painelMostrarSenha);
+
+        entrar = new JButton("Entrar");
+        entrar.setBackground(corPrincipal);
+        entrar.setForeground(Color.WHITE);
+        entrar.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        entrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        entrar.setMaximumSize(new Dimension(300, 34));
+        entrar.setPreferredSize(new Dimension(300, 34));
+        entrar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        entrar.addActionListener(this::entrarActionPerformed);
+
+        jButtonRedirecionamentoCadastro = new JButton("Ainda não possui login? Faça o cadastro aqui");
+        jButtonRedirecionamentoCadastro.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+        jButtonRedirecionamentoCadastro.setForeground(new Color(51, 51, 255));
+        jButtonRedirecionamentoCadastro.setBorder(null);
+        jButtonRedirecionamentoCadastro.setContentAreaFilled(false);
+        jButtonRedirecionamentoCadastro.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jButtonRedirecionamentoCadastro.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jButtonRedirecionamentoCadastro.addActionListener(this::jButtonRedirecionamentoCadastroActionPerformed);
+
+        painel.add(jLabelLogin);
+        painel.add(Box.createVerticalStrut(8));
+        painel.add(jLabel2);
+        painel.add(Box.createVerticalStrut(34));
+        painel.add(painelCampos);
+        painel.add(Box.createVerticalStrut(24));
+        painel.add(entrar);
+        painel.add(Box.createVerticalStrut(12));
+        painel.add(jButtonRedirecionamentoCadastro);
+
+        return painel;
+    }
+
+    private JLabel criarLabelCampo(String texto) {
+        JLabel label = new JLabel(texto);
+        label.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        label.setAlignmentX(Component.LEFT_ALIGNMENT);
+        label.setMaximumSize(new Dimension(300, 18));
+        return label;
+    }
+
+    private JTextField criarCampoTexto() {
+        JTextField campo = new JTextField();
+        campo.setMaximumSize(new Dimension(300, 32));
+        campo.setPreferredSize(new Dimension(300, 32));
+        campo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        return campo;
+    }
+
+    private void entrarActionPerformed(java.awt.event.ActionEvent evt) {
+        String email = jTextFieldEmail.getText();
+        String senha = new String(txtSenha.getPassword());
+
+        if (email.isBlank() || senha.isBlank()) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Preencha todos os campos!",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+            return;
         }
 
-        Usuario professor = repository.buscarProfessorPorEmail(email);
-        if (professor != null && professor.getSenha().equals(senha)) {
-        Sessao.login(professor); // 🔑 salva o usuário logado
-        new TelaMenuProfessores().setVisible(true);
-        this.dispose();
-        return;
-        }
-
-        javax.swing.JOptionPane.showMessageDialog(this, "E-mail ou senha incorretos.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
-
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao conectar: " + e.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
-    }//GEN-LAST:event_entrarActionPerformed
-
-    private void mostrarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarSenhaActionPerformed
-        if (mostrarSenha.isSelected()) {
-        txtSenha.setEchoChar((char) 0); 
-    } else {
-        txtSenha.setEchoChar('•'); 
-    }
-    }//GEN-LAST:event_mostrarSenhaActionPerformed
-
-    private void jButtonRedirecionamentoCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRedirecionamentoCadastroActionPerformed
-        new TelaCadastro().setVisible(true); // Exibe o que foi criado. Nesse caso, o objeto TelaCadastro
-        this.dispose(); // Método dispose encerra e destrói a janela de forma segura 
-    }//GEN-LAST:event_jButtonRedirecionamentoCadastroActionPerformed
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            UsuarioRepository repository = new UsuarioRepository();
+
+            Usuario aluno = repository.buscarAlunoPorEmail(email);
+            if (aluno != null && aluno.getSenha().equals(senha)) {
+                Sessao.login(aluno);
+                new TelaMenuAlunos().setVisible(true);
+                this.dispose();
+                return;
+            }
+
+            Usuario professor = repository.buscarProfessorPorEmail(email);
+            if (professor != null && professor.getSenha().equals(senha)) {
+                Sessao.login(professor);
+                new TelaMenuProfessores().setVisible(true);
+                this.dispose();
+                return;
+            }
+
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "E-mail ou senha incorretos.",
+                    "Erro",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Erro ao conectar: " + e.getMessage(),
+                    "Erro",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    private void mostrarSenhaActionPerformed(java.awt.event.ActionEvent evt) {
+        if (mostrarSenha.isSelected()) {
+            txtSenha.setEchoChar((char) 0);
+        } else {
+            txtSenha.setEchoChar('•');
+        }
+    }
+
+    private void jButtonRedirecionamentoCadastroActionPerformed(java.awt.event.ActionEvent evt) {
+        new TelaCadastro().setVisible(true);
+        this.dispose();
+    }
+
+    public static void main(String[] args) {
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new TelaLogin().setVisible(true));
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton entrar;
-    private javax.swing.JButton jButtonRedirecionamentoCadastro;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabelEmail;
-    private javax.swing.JLabel jLabelLogin;
-    private javax.swing.JLabel jLabelMostrarSenha;
-    private javax.swing.JLabel jLabelSenha;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JPanel jPanelFundoAzul;
-    private javax.swing.JPanel jPanelFundoBranco;
-    private javax.swing.JPanel jPanelFundoLogin;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JToggleButton mostrarSenha;
-    private javax.swing.JPasswordField txtSenha;
-    // End of variables declaration//GEN-END:variables
 }
