@@ -1,109 +1,185 @@
 package br.com.pi_2026_1_etec.view.telas;
 
-public class TelaInicialJogo extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaInicialJogo.class.getName());
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+
+public class TelaInicialJogo extends JFrame {
+
+    private static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(TelaInicialJogo.class.getName());
+
+    private JButton jButtonJogar;
+    private JLabel jLabelTitulo1;
+    private JLabel jLabelTitulo2;
+    private JLabel jLabelSubtitulo;
+    private JLabel jLabelLogo;
+    private JLabel jLabelImagemFundo;
+    private JPanel jPanel1;
+
+    private final Color corPrincipal = new Color(7, 92, 110);
 
     public TelaInicialJogo() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("O Grande Desafio da Química");
+        setMinimumSize(new Dimension(900, 550));
 
-        jPanel1 = new javax.swing.JPanel();
-        jButtonJogar = new javax.swing.JButton();
-        jLabelTitulo1 = new javax.swing.JLabel();
-        jLabelTitulo2 = new javax.swing.JLabel();
-        jLabelSubtitulo = new javax.swing.JLabel();
-        jLabelLogo = new javax.swing.JLabel();
-        jLabelImagemFundo = new javax.swing.JLabel();
+        jPanel1 = new JPanelComImagemFundo("/ImagensEtec/telaInicio.png");
+        jPanel1.setLayout(new BorderLayout());
+        jPanel1.setBorder(new EmptyBorder(40, 45, 35, 45));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        JPanel painelConteudo = new JPanel(new BorderLayout());
+        painelConteudo.setOpaque(false);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        JPanel painelTextos = criarPainelTextos();
+        JPanel painelLogo = criarPainelLogo();
 
-        jButtonJogar.setBackground(new java.awt.Color(7, 92, 110));
-        jButtonJogar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonJogar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonJogar.setText("JOGAR");
-        jButtonJogar.addActionListener(this::jButtonJogarActionPerformed);
-        jPanel1.add(jButtonJogar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 140, 40));
+        painelConteudo.add(painelTextos, BorderLayout.WEST);
+        painelConteudo.add(painelLogo, BorderLayout.SOUTH);
 
-        jLabelTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabelTitulo1.setForeground(new java.awt.Color(7, 92, 110));
-        jLabelTitulo1.setText("O GRANDE DESAFIO");
-        jPanel1.add(jLabelTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel1.add(painelConteudo, BorderLayout.CENTER);
 
-        jLabelTitulo2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabelTitulo2.setForeground(new java.awt.Color(7, 92, 110));
-        jLabelTitulo2.setText("DA QUÍMICA");
-        jPanel1.add(jLabelTitulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
-
-        jLabelSubtitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabelSubtitulo.setText("Uma forma mais divertida de estudar Química");
-        jPanel1.add(jLabelSubtitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
-
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/LogoCPS.png"))); // NOI18N
-        jPanel1.add(jLabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, -1, -1));
-
-        jLabelImagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/telaInicio.png"))); // NOI18N
-        jLabelImagemFundo.setVerifyInputWhenFocusTarget(false);
-        jPanel1.add(jLabelImagemFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-43, 0, -1, -1));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(jPanel1, BorderLayout.CENTER);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+        setLocationRelativeTo(null);
+    }
 
-    private void jButtonJogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJogarActionPerformed
-       new TelaLogin().setVisible(true); // Exibe o que foi criado. Nesse caso, o objeto TelaLogin
-       this.dispose(); // Método dispose encerra e destrói a janela de forma segura
-    }//GEN-LAST:event_jButtonJogarActionPerformed
-   
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private JPanel criarPainelTextos() {
+        JPanel painelContainer = new JPanel(new GridBagLayout());
+        painelContainer.setOpaque(false);
+        painelContainer.setPreferredSize(new Dimension(460, 400));
+
+        JPanel painelTextos = new JPanel();
+        painelTextos.setOpaque(false);
+        painelTextos.setLayout(new BoxLayout(painelTextos, BoxLayout.Y_AXIS));
+
+        jLabelTitulo1 = new JLabel("O GRANDE DESAFIO");
+        jLabelTitulo1.setFont(new Font("Segoe UI", Font.BOLD, 38));
+        jLabelTitulo1.setForeground(corPrincipal);
+        jLabelTitulo1.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        jLabelTitulo2 = new JLabel("DA QUÍMICA");
+        jLabelTitulo2.setFont(new Font("Segoe UI", Font.BOLD, 38));
+        jLabelTitulo2.setForeground(corPrincipal);
+        jLabelTitulo2.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        jLabelSubtitulo = new JLabel("Uma forma mais divertida de estudar Química");
+        jLabelSubtitulo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        jLabelSubtitulo.setForeground(Color.BLACK);
+        jLabelSubtitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        jButtonJogar = new JButton("JOGAR");
+        jButtonJogar.setBackground(corPrincipal);
+        jButtonJogar.setForeground(Color.WHITE);
+        jButtonJogar.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        jButtonJogar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jButtonJogar.setFocusPainted(false);
+        jButtonJogar.setPreferredSize(new Dimension(150, 42));
+        jButtonJogar.setMaximumSize(new Dimension(150, 42));
+        jButtonJogar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jButtonJogar.addActionListener(this::jButtonJogarActionPerformed);
+
+        painelTextos.add(jLabelTitulo1);
+        painelTextos.add(Box.createVerticalStrut(4));
+        painelTextos.add(jLabelTitulo2);
+        painelTextos.add(Box.createVerticalStrut(14));
+        painelTextos.add(jLabelSubtitulo);
+        painelTextos.add(Box.createVerticalStrut(48));
+        painelTextos.add(jButtonJogar);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(0, 0, 80, 0);
+
+        painelContainer.add(painelTextos, gbc);
+
+        return painelContainer;
+    }
+
+    private JPanel criarPainelLogo() {
+        JPanel painelLogo = new JPanel(new BorderLayout());
+        painelLogo.setOpaque(false);
+
+        jLabelLogo = new JLabel();
+
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            jLabelLogo.setIcon(new ImageIcon(getClass().getResource("/ImagensEtec/LogoCPS.png")));
+        } catch (Exception e) {
+            jLabelLogo.setText("");
+        }
+
+        painelLogo.add(jLabelLogo, BorderLayout.WEST);
+
+        return painelLogo;
+    }
+
+    private void jButtonJogarActionPerformed(java.awt.event.ActionEvent evt) {
+        new TelaLogin().setVisible(true);
+        this.dispose();
+    }
+
+    public static void main(String[] args) {
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new TelaInicialJogo().setVisible(true));
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonJogar;
-    private javax.swing.JLabel jLabelImagemFundo;
-    private javax.swing.JLabel jLabelLogo;
-    private javax.swing.JLabel jLabelSubtitulo;
-    private javax.swing.JLabel jLabelTitulo1;
-    private javax.swing.JLabel jLabelTitulo2;
-    private javax.swing.JPanel jPanel1;
-    // End of variables declaration//GEN-END:variables
+    private static class JPanelComImagemFundo extends JPanel {
+
+        private Image imagemFundo;
+
+        public JPanelComImagemFundo(String caminhoImagem) {
+            try {
+                imagemFundo = new ImageIcon(getClass().getResource(caminhoImagem)).getImage();
+            } catch (Exception e) {
+                imagemFundo = null;
+                setBackground(Color.WHITE);
+            }
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            if (imagemFundo != null) {
+                g.drawImage(imagemFundo, 0, 0, getWidth(), getHeight(), this);
+            }
+        }
+    }
 }
