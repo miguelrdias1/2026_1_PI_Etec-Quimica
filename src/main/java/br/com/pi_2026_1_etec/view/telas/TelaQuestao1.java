@@ -1,187 +1,318 @@
 package br.com.pi_2026_1_etec.view.telas;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 import br.com.pi_2026_1_etec.model.Alternativa;
 import br.com.pi_2026_1_etec.model.Pergunta;
 
-public class TelaQuestao1 extends javax.swing.JFrame {
+public class TelaQuestao1 extends JFrame {
 
     private List<Pergunta> listaPerguntas;
     private int indiceAtual = 0;
     private List<Alternativa> alternativasAtuais;
-    
 
-    private static final java.util.logging.Logger logger
-            = java.util.logging.Logger.getLogger(TelaQuestao1.class.getName());
+    private static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(TelaQuestao1.class.getName());
+
+    private JButton jButtonA;
+    private JButton jButtonB;
+    private JButton jButtonC;
+    private JButton jButtonD;
+    private JButton jButtonDica;
+
+    private JLabel jLabelImagemPergunta;
+    private JLabel jLabelPergunta;
+
+    private JLayeredPane jLayeredPane1;
+    private JPanel jPanel1;
+    private JProgressBar jProgressBar1;
+
+    private final Color corPrincipal = new Color(7, 92, 110);
 
     public TelaQuestao1(List<Pergunta> perguntas) {
         initComponents();
+
         this.listaPerguntas = perguntas;
         this.indiceAtual = 0;
 
         exibirPerguntaAtual();
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     private void exibirPerguntaAtual() {
         if (listaPerguntas != null && indiceAtual < listaPerguntas.size()) {
             Pergunta p = listaPerguntas.get(indiceAtual);
-            jLabelPergunta.setText(p.getTexto());// troca o texto da label pelo texto da pergunta na lista
 
-            try {//try por causa da conexao com bd
-                br.com.pi_2026_1_etec.dao.AlternativaDAO altDAO = new br.com.pi_2026_1_etec.dao.AlternativaDAO(); //puxa alternativa do banco
-                this.alternativasAtuais = altDAO.listarPorPergunta(p.getIdPergunta());//coloca as alternativas em uma lista seguindo o ID da pergunta
-                
-                java.util.Collections.shuffle(this.alternativasAtuais);//Embaralha as alternativas da lista para nunca repetir a ordem das perguntas
-                    jButtonA.setText(alternativasAtuais.get(0).getTexto());
-                    jButtonB.setText(alternativasAtuais.get(1).getTexto());
-                    jButtonC.setText(alternativasAtuais.get(2).getTexto());
-                    jButtonD.setText(alternativasAtuais.get(3).getTexto());
-                
+            jLabelPergunta.setText(formatarTextoPergunta(p.getTexto()));
+
+            atualizarBarraProgresso();
+
+            try {
+                br.com.pi_2026_1_etec.dao.AlternativaDAO altDAO =
+                        new br.com.pi_2026_1_etec.dao.AlternativaDAO();
+
+                this.alternativasAtuais = altDAO.listarPorPergunta(p.getIdPergunta());
+
+                java.util.Collections.shuffle(this.alternativasAtuais);
+
+                if (alternativasAtuais.size() >= 4) {
+                    jButtonA.setText(formatarTextoBotao(alternativasAtuais.get(0).getTexto()));
+                    jButtonB.setText(formatarTextoBotao(alternativasAtuais.get(1).getTexto()));
+                    jButtonC.setText(formatarTextoBotao(alternativasAtuais.get(2).getTexto()));
+                    jButtonD.setText(formatarTextoBotao(alternativasAtuais.get(3).getTexto()));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Essa pergunta não possui 4 alternativas cadastradas.");
+                }
 
             } catch (java.sql.SQLException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar alternativas: " + e.getMessage());
+                JOptionPane.showMessageDialog(this, "Erro ao carregar alternativas: " + e.getMessage());
             }
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Fim do jogo");//nao sei oq fazer dps disso, voltaria pra tela menu alunos?
+            JOptionPane.showMessageDialog(this, "Fim do jogo");
+            new TelaMenuAlunos().setVisible(true);
+            this.dispose();
         }
+    }
+
+    private String formatarTextoPergunta(String texto) {
+        if (texto == null) {
+            texto = "";
+        }
+
+        return "<html><div style='text-align:center; width:850px;'>"
+                + texto
+                + "</div></html>";
+    }
+
+    private String formatarTextoBotao(String texto) {
+        if (texto == null) {
+            texto = "";
+        }
+
+        return "<html><div style='text-align:center; width:330px;'>"
+                + texto
+                + "</div></html>";
+    }
+
+    private void atualizarBarraProgresso() {
+        if (listaPerguntas == null || listaPerguntas.isEmpty()) {
+            jProgressBar1.setValue(0);
+            return;
+        }
+
+        int total = listaPerguntas.size();
+        int atual = indiceAtual + 1;
+
+        jProgressBar1.setMaximum(total);
+        jProgressBar1.setValue(atual);
+        jProgressBar1.setString(atual + " / " + total);
+        jProgressBar1.setStringPainted(true);
     }
 
     private void verificarResposta(Alternativa alternativaClicada) {
         if (alternativaClicada.isCorreta()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Acertou");
+            JOptionPane.showMessageDialog(this, "Acertou");
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Resposta incorreta");
+            JOptionPane.showMessageDialog(this, "Resposta incorreta");
         }
-    
+
+        avancarPergunta();
     }
-    
+
     private void avancarPergunta() {
-    indiceAtual++;
-    exibirPerguntaAtual();
+        indiceAtual++;
+        exibirPerguntaAtual();
     }
-    
-private void jButtonAActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    if (alternativasAtuais != null && alternativasAtuais.size() >= 1) {
-        verificarResposta(alternativasAtuais.get(0));//botao A->indice da lista 0 (ta organizado na lista pra ficar igual ja)
-    }
-}
-private void jButtonBActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    if (alternativasAtuais != null && alternativasAtuais.size() >= 2) {
-        verificarResposta(alternativasAtuais.get(1)); //botao A->indice da lista 1 (ta organizado na lista pra ficar igual ja)
-    }
-}                                        
 
-private void jButtonCActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    if (alternativasAtuais != null && alternativasAtuais.size() >= 3) {
-        verificarResposta(alternativasAtuais.get(2)); ////botao C->indice da lista 2 (ta organizado na lista pra ficar igual ja)
-    }
-}                                        
-
-private void jButtonDActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    if (alternativasAtuais != null && alternativasAtuais.size() >= 4) {
-        verificarResposta(alternativasAtuais.get(3)); //botao D->indice da lista 3 (ta organizado na lista pra ficar igual ja) 
-    }
-}
-
-
-
-
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Questão");
+        setMinimumSize(new Dimension(1000, 650));
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jPanel1 = new javax.swing.JPanel();
-        jButtonDica = new javax.swing.JButton();
-        jLabelPergunta = new javax.swing.JLabel();
-        jButtonA = new javax.swing.JButton();
-        jButtonB = new javax.swing.JButton();
-        jButtonC = new javax.swing.JButton();
-        jButtonD = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabelImagemPergunta = new javax.swing.JLabel();
+        jLayeredPane1 = new JLayeredPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new JPanel(new BorderLayout(25, 20));
+        jPanel1.setBackground(Color.WHITE);
+        jPanel1.setBorder(new EmptyBorder(18, 35, 30, 35));
 
-        jLayeredPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        JPanel painelTopo = criarPainelTopo();
+        JPanel painelCentro = criarPainelCentro();
+        JPanel painelInferior = criarPainelInferior();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(painelTopo, BorderLayout.NORTH);
+        jPanel1.add(painelCentro, BorderLayout.CENTER);
+        jPanel1.add(painelInferior, BorderLayout.SOUTH);
 
-        jButtonDica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagensEtec/Dica.png"))); // NOI18N
-        jButtonDica.addActionListener(this::jButtonDicaActionPerformed);
-        jPanel1.add(jButtonDica, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 36, 36));
-
-        jLabelPergunta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabelPergunta.setText("Pergunta");
-        jLabelPergunta.setToolTipText("");
-        jPanel1.add(jLabelPergunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        jButtonA.setBackground(new java.awt.Color(7, 92, 110));
-        jButtonA.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonA.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonA.setText("Alternativa A");
-        jPanel1.add(jButtonA, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 250, 80));
-
-
-        jButtonB.setBackground(new java.awt.Color(7, 92, 110));
-        jButtonB.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonB.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonB.setText("Alternativa B");
-        jPanel1.add(jButtonB, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, 250, 80));
-
-        jButtonC.setBackground(new java.awt.Color(7, 92, 110));
-        jButtonC.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonC.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonC.setText("Alternativa C");
-        jPanel1.add(jButtonC, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 250, 80));
-
-        jButtonD.setBackground(new java.awt.Color(7, 92, 110));
-        jButtonD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonD.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonD.setText("Alternativa D");
-        jPanel1.add(jButtonD, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 250, 80));
-        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 510, 10));
-
-        jLabelImagemPergunta.setText("Imagem");
-        jLabelImagemPergunta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        jPanel1.add(jLabelImagemPergunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 240, 240));
-
-        jLayeredPane1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 775, 460));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(jPanel1, BorderLayout.CENTER);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+        setLocationRelativeTo(null);
+    }
 
-    private void jButtonDicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDicaActionPerformed
+    private JPanel criarPainelTopo() {
+        JPanel painelTopo = new JPanel(new BorderLayout(15, 0));
+        painelTopo.setOpaque(false);
 
-    }//GEN-LAST:event_jButtonDicaActionPerformed
+        jLabelPergunta = new JLabel("Pergunta");
+        jLabelPergunta.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        jLabelPergunta.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabelPergunta.setVerticalAlignment(SwingConstants.CENTER);
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonA;
-    private javax.swing.JButton jButtonB;
-    private javax.swing.JButton jButtonC;
-    private javax.swing.JButton jButtonD;
-    private javax.swing.JButton jButtonDica;
-    private javax.swing.JLabel jLabelImagemPergunta;
-    private javax.swing.JLabel jLabelPergunta;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
-    // End of variables declaration//GEN-END:variables
+        jButtonDica = new JButton();
+        jButtonDica.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jButtonDica.setPreferredSize(new Dimension(45, 45));
+        jButtonDica.setFocusPainted(false);
+        jButtonDica.addActionListener(this::jButtonDicaActionPerformed);
+
+        try {
+            jButtonDica.setIcon(new ImageIcon(getClass().getResource("/ImagensEtec/Dica.png")));
+        } catch (Exception e) {
+            jButtonDica.setText("?");
+        }
+
+        painelTopo.add(Box.createHorizontalStrut(45), BorderLayout.WEST);
+        painelTopo.add(jLabelPergunta, BorderLayout.CENTER);
+        painelTopo.add(jButtonDica, BorderLayout.EAST);
+
+        return painelTopo;
+    }
+
+    private JPanel criarPainelCentro() {
+        JPanel painelCentro = new JPanel();
+        painelCentro.setOpaque(false);
+        painelCentro.setLayout(new BoxLayout(painelCentro, BoxLayout.Y_AXIS));
+
+        JPanel painelImagem = new JPanel(new BorderLayout());
+        painelImagem.setOpaque(false);
+        painelImagem.setAlignmentX(Component.CENTER_ALIGNMENT);
+        painelImagem.setMaximumSize(new Dimension(420, 280));
+        painelImagem.setPreferredSize(new Dimension(420, 280));
+
+        jLabelImagemPergunta = new JLabel("Imagem");
+        jLabelImagemPergunta.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabelImagemPergunta.setVerticalAlignment(SwingConstants.CENTER);
+        jLabelImagemPergunta.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        jLabelImagemPergunta.setBorder(BorderFactory.createLineBorder(new Color(153, 153, 153)));
+        jLabelImagemPergunta.setPreferredSize(new Dimension(420, 280));
+
+        painelImagem.add(jLabelImagemPergunta, BorderLayout.CENTER);
+
+        jProgressBar1 = new JProgressBar();
+        jProgressBar1.setMaximumSize(new Dimension(700, 18));
+        jProgressBar1.setPreferredSize(new Dimension(700, 18));
+        jProgressBar1.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        painelCentro.add(Box.createVerticalGlue());
+        painelCentro.add(painelImagem);
+        painelCentro.add(Box.createVerticalStrut(25));
+        painelCentro.add(jProgressBar1);
+        painelCentro.add(Box.createVerticalGlue());
+
+        return painelCentro;
+    }
+
+    private JPanel criarPainelInferior() {
+        JPanel painelInferior = new JPanel(new GridLayout(2, 2, 18, 14));
+        painelInferior.setOpaque(false);
+        painelInferior.setBorder(new EmptyBorder(0, 95, 0, 95));
+        painelInferior.setPreferredSize(new Dimension(900, 190));
+
+        jButtonA = criarBotaoAlternativa("Alternativa A");
+        jButtonB = criarBotaoAlternativa("Alternativa B");
+        jButtonC = criarBotaoAlternativa("Alternativa C");
+        jButtonD = criarBotaoAlternativa("Alternativa D");
+
+        jButtonA.addActionListener(this::jButtonAActionPerformed);
+        jButtonB.addActionListener(this::jButtonBActionPerformed);
+        jButtonC.addActionListener(this::jButtonCActionPerformed);
+        jButtonD.addActionListener(this::jButtonDActionPerformed);
+
+        painelInferior.add(jButtonA);
+        painelInferior.add(jButtonB);
+        painelInferior.add(jButtonC);
+        painelInferior.add(jButtonD);
+
+        return painelInferior;
+    }
+
+    private JButton criarBotaoAlternativa(String texto) {
+        JButton botao = new JButton(texto);
+        botao.setBackground(corPrincipal);
+        botao.setForeground(Color.WHITE);
+        botao.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        botao.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        botao.setFocusPainted(false);
+        botao.setBorder(BorderFactory.createLineBorder(corPrincipal.darker(), 2));
+        return botao;
+    }
+
+    private void jButtonAActionPerformed(java.awt.event.ActionEvent evt) {
+        if (alternativasAtuais != null && alternativasAtuais.size() >= 1) {
+            verificarResposta(alternativasAtuais.get(0));
+        }
+    }
+
+    private void jButtonBActionPerformed(java.awt.event.ActionEvent evt) {
+        if (alternativasAtuais != null && alternativasAtuais.size() >= 2) {
+            verificarResposta(alternativasAtuais.get(1));
+        }
+    }
+
+    private void jButtonCActionPerformed(java.awt.event.ActionEvent evt) {
+        if (alternativasAtuais != null && alternativasAtuais.size() >= 3) {
+            verificarResposta(alternativasAtuais.get(2));
+        }
+    }
+
+    private void jButtonDActionPerformed(java.awt.event.ActionEvent evt) {
+        if (alternativasAtuais != null && alternativasAtuais.size() >= 4) {
+            verificarResposta(alternativasAtuais.get(3));
+        }
+    }
+
+    private void jButtonDicaActionPerformed(java.awt.event.ActionEvent evt) {
+        // Mantido vazio, como estava no código original.
+    }
+
+    public static void main(String[] args) {
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Essa tela precisa receber uma lista de perguntas para funcionar.\nAbra ela pelo Menu de Alunos."
+        );
+    }
 }
