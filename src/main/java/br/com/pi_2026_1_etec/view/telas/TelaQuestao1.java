@@ -91,7 +91,6 @@ public class TelaQuestao1 extends JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao carregar alternativas: " + e.getMessage());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Fim do jogo");
             new TelaMenuAlunos().setVisible(true);
             this.dispose();
         }

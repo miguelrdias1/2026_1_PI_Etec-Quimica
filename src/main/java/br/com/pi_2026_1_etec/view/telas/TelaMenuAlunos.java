@@ -1,9 +1,5 @@
 package br.com.pi_2026_1_etec.view.telas;
 
-import br.com.pi_2026_1_etec.dao.PerguntaDAO;
-import br.com.pi_2026_1_etec.model.Pergunta;
-import br.com.pi_2026_1_etec.model.Sessao;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -28,6 +24,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import br.com.pi_2026_1_etec.dao.PerguntaDAO;
+import br.com.pi_2026_1_etec.model.Pergunta;
+import br.com.pi_2026_1_etec.model.Sessao;
 
 public class TelaMenuAlunos extends JFrame {
 
@@ -233,6 +233,7 @@ public class TelaMenuAlunos extends JFrame {
         try {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(2);
+            this.dispose();
             new TelaQuestao1(perguntas).setVisible(true);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
@@ -243,6 +244,7 @@ public class TelaMenuAlunos extends JFrame {
         try {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(1);
+            this.dispose();
             new TelaQuestao1(perguntas).setVisible(true);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
@@ -258,8 +260,17 @@ public class TelaMenuAlunos extends JFrame {
     private void btnRandomActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             PerguntaDAO dao = new PerguntaDAO();
-            List<Pergunta> perguntas = dao.listarPorNivel(0);
-            new TelaQuestao1(perguntas).setVisible(true);
+            List<Pergunta> perguntasFaceis = dao.listarPorNivel(1);
+            List<Pergunta> perguntasMedias = dao.listarPorNivel(2);
+            List<Pergunta> perguntasDificeis = dao.listarPorNivel(3);
+            List<Pergunta> todasAsPerguntas= new java.util.ArrayList<>();
+            todasAsPerguntas.addAll(perguntasFaceis);
+            todasAsPerguntas.addAll(perguntasMedias);
+            todasAsPerguntas.addAll(perguntasDificeis);
+            java.util.Collections.shuffle(todasAsPerguntas);
+
+            new TelaQuestao1(todasAsPerguntas).setVisible(true);
+            this.dispose();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
@@ -269,6 +280,7 @@ public class TelaMenuAlunos extends JFrame {
         try {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(3);
+            this.dispose();
             new TelaQuestao1(perguntas).setVisible(true);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
