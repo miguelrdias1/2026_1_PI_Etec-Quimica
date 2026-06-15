@@ -12,7 +12,7 @@ public class DicaRepository {
 
     public String buscarTextoPorQuestao(int questaoId) {
 
-        String sql = "SELECT texto FROM dica WHERE questao_id = ?";
+        String sql = "SELECT texto FROM dicas WHERE id_pergunta = ?";
         String texto = null;
 
         try (Connection c = ConexaoBD.obterConexao();

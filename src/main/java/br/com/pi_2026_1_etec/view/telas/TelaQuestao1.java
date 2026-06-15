@@ -330,7 +330,20 @@ public class TelaQuestao1 extends JFrame {
     }
 
     private void jButtonDicaActionPerformed(java.awt.event.ActionEvent evt) {
-        // Mantido vazio, como estava no código original.
+         if (listaPerguntas == null || indiceAtual >= listaPerguntas.size()) {
+        return;
+    }
+
+    Pergunta p = listaPerguntas.get(indiceAtual);
+
+    br.com.pi_2026_1_etec.repository.DicaRepository dicaRepository = new br.com.pi_2026_1_etec.repository.DicaRepository();
+    String dica = dicaRepository.buscarTextoPorQuestao(p.getIdPergunta());
+
+    if (dica == null || dica.isBlank()) {
+        JOptionPane.showMessageDialog(this, "Não há dica disponível para esta pergunta.", "Dica", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this, dica, "Dica", JOptionPane.INFORMATION_MESSAGE);
+    }
     }
 
     public static void main(String[] args) {
