@@ -1,9 +1,5 @@
 package br.com.pi_2026_1_etec.view.telas;
 
-import br.com.pi_2026_1_etec.dao.PerguntaDAO;
-import br.com.pi_2026_1_etec.model.Pergunta;
-import br.com.pi_2026_1_etec.model.Sessao;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -28,6 +24,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import br.com.pi_2026_1_etec.dao.PerguntaDAO;
+import br.com.pi_2026_1_etec.model.Pergunta;
+import br.com.pi_2026_1_etec.model.Sessao;
 
 public class TelaMenuAlunos extends JFrame {
 
@@ -253,6 +253,7 @@ public class TelaMenuAlunos extends JFrame {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(2);
             new TelaQuestao1(perguntas).setVisible(true);
+            this.dispose();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
@@ -263,6 +264,7 @@ public class TelaMenuAlunos extends JFrame {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(1);
             new TelaQuestao1(perguntas).setVisible(true);
+            this.dispose();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
@@ -279,6 +281,7 @@ public class TelaMenuAlunos extends JFrame {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(0);
             new TelaQuestao1(perguntas).setVisible(true);
+            this.dispose();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
@@ -289,6 +292,7 @@ public class TelaMenuAlunos extends JFrame {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(3);
             new TelaQuestao1(perguntas).setVisible(true);
+            this.dispose();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
