@@ -38,21 +38,14 @@ public class TelaGerenciarAlunos extends JFrame {
     private JButton jButtonVoltar;
 
     private JLabel jLabelAlunos;
-    private JLabel jLabel2;
+    private JLabel jLabelContador;
+    private JLabel jLabelNomeAluno;
+    private JLabel jLabelPerguntas;
+    private JLabel jLabelAcertos;
+    private JLabel jLabelErros;
     private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JLabel jLabel5;
-    private JLabel jLabel6;
-    private JLabel jLabel7;
-    private JLabel jLabel8;
-    private JLabel jLabel9;
-    private JLabel jLabel10;
 
     private JPanel jPanel1;
-    private JPanel jPanel2;
-    private JPanel jPanel3;
-    private JPanel jPanel4;
-    private JPanel jPanel5;
     private JPanel jPanel6;
     private JPanel jPanelListaDeAlunos;
     private JPanel jPanelTotalPerguntas;
@@ -135,39 +128,34 @@ public class TelaGerenciarAlunos extends JFrame {
         painelBusca.add(jTextField1, BorderLayout.CENTER);
         painelBusca.add(jButton1, BorderLayout.EAST);
 
-        jLabel2 = new JLabel("Lista de Alunos");
+        JLabel jLabel2 = new JLabel("Lista de Alunos");
         jLabel2.setFont(new Font("Segoe UI", Font.BOLD, 16));
 
-        jPanelListaDeAlunos = new JPanel();
-        jPanelListaDeAlunos.setBackground(corFundoClaro);
-        jPanelListaDeAlunos.setBorder(BorderFactory.createLineBorder(corPrincipal));
-        jPanelListaDeAlunos.setPreferredSize(new Dimension(70, 25));
-        jPanelListaDeAlunos.setMinimumSize(new Dimension(70, 25));
-        jPanelListaDeAlunos.setMaximumSize(new Dimension(70, 25));
+        jLabelContador = new JLabel("0");
+        jLabelContador.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        jLabelContador.setForeground(Color.WHITE);
+        jLabelContador.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabelContador.setOpaque(true);
+        jLabelContador.setBackground(corPrincipal);
+        jLabelContador.setBorder(new EmptyBorder(2, 8, 2, 8));
 
         JPanel painelTituloLista = new JPanel(new BorderLayout());
         painelTituloLista.setOpaque(false);
         painelTituloLista.setMaximumSize(new Dimension(Integer.MAX_VALUE, 32));
         painelTituloLista.setAlignmentX(LEFT_ALIGNMENT);
         painelTituloLista.add(jLabel2, BorderLayout.WEST);
-        painelTituloLista.add(jPanelListaDeAlunos, BorderLayout.EAST);
+        painelTituloLista.add(jLabelContador, BorderLayout.EAST);
 
-        jPanel2 = criarPainelAlunoVazio();
-        jPanel3 = criarPainelAlunoVazio();
-        jPanel4 = criarPainelAlunoVazio();
-        jPanel5 = criarPainelAlunoVazio();
+        jPanelListaDeAlunos = new JPanel();
+        jPanelListaDeAlunos.setBackground(corFundoClaro);
+        jPanelListaDeAlunos.setLayout(new BoxLayout(jPanelListaDeAlunos, BoxLayout.Y_AXIS));
 
-        JPanel painelLista = new JPanel();
-        painelLista.setOpaque(false);
-        painelLista.setLayout(new GridLayout(4, 1, 0, 12));
-        painelLista.setMaximumSize(new Dimension(Integer.MAX_VALUE, 220));
-        painelLista.setPreferredSize(new Dimension(420, 220));
-        painelLista.setAlignmentX(LEFT_ALIGNMENT);
-
-        painelLista.add(jPanel2);
-        painelLista.add(jPanel3);
-        painelLista.add(jPanel4);
-        painelLista.add(jPanel5);
+        JScrollPane scrollLista = new JScrollPane(jPanelListaDeAlunos);
+        scrollLista.setBorder(BorderFactory.createLineBorder(corPrincipal));
+        scrollLista.setAlignmentX(LEFT_ALIGNMENT);
+        scrollLista.setPreferredSize(new Dimension(400, 300));
+        scrollLista.setMaximumSize(new Dimension(Integer.MAX_VALUE, 300));
+        scrollLista.getVerticalScrollBar().setUnitIncrement(16);
 
         JPanel painelLogo = new JPanel(new FlowLayout(FlowLayout.CENTER));
         painelLogo.setOpaque(false);
@@ -175,14 +163,12 @@ public class TelaGerenciarAlunos extends JFrame {
         painelLogo.setAlignmentX(LEFT_ALIGNMENT);
 
         jLabel3 = new JLabel();
-
         try {
             ImageIcon logo = new ImageIcon(getClass().getResource("/ImagensEtec/LogoCPS.png"));
             jLabel3.setIcon(logo);
         } catch (Exception e) {
             jLabel3.setText("");
         }
-
         painelLogo.add(jLabel3);
 
         painelEsquerdo.add(Box.createVerticalStrut(10));
@@ -192,7 +178,7 @@ public class TelaGerenciarAlunos extends JFrame {
         painelEsquerdo.add(Box.createVerticalStrut(25));
         painelEsquerdo.add(painelTituloLista);
         painelEsquerdo.add(Box.createVerticalStrut(12));
-        painelEsquerdo.add(painelLista);
+        painelEsquerdo.add(scrollLista);
         painelEsquerdo.add(Box.createVerticalGlue());
         painelEsquerdo.add(painelLogo);
 
@@ -207,20 +193,20 @@ public class TelaGerenciarAlunos extends JFrame {
                 new EmptyBorder(25, 30, 30, 30)
         ));
 
-        jLabel4 = new JLabel("Aluno");
-        jLabel4.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        jLabelNomeAluno = new JLabel("Selecione um aluno");
+        jLabelNomeAluno.setFont(new Font("Segoe UI", Font.BOLD, 24));
 
         jPanelTotalPerguntas = new JPanel();
         jPanelAcertos = new JPanel();
         jPanelErros = new JPanel();
 
-        jLabel6 = new JLabel("Perguntas");
-        jLabel5 = new JLabel("Acertos");
-        jLabel7 = new JLabel("Erros");
+        jLabelPerguntas = new JLabel("Perguntas: -");
+        jLabelAcertos = new JLabel("Acertos: -");
+        jLabelErros = new JLabel("Erros: -");
 
-        configurarCard(jPanelTotalPerguntas, jLabel6);
-        configurarCard(jPanelAcertos, jLabel5);
-        configurarCard(jPanelErros, jLabel7);
+        configurarCard(jPanelTotalPerguntas, jLabelPerguntas);
+        configurarCard(jPanelAcertos, jLabelAcertos);
+        configurarCard(jPanelErros, jLabelErros);
 
         JPanel painelCards = new JPanel(new GridLayout(1, 3, 20, 0));
         painelCards.setOpaque(false);
@@ -240,13 +226,9 @@ public class TelaGerenciarAlunos extends JFrame {
         painelLabelsGraficos.setOpaque(false);
         painelLabelsGraficos.setPreferredSize(new Dimension(800, 60));
 
-        jLabel10 = criarLabelGrafico("Fácil");
-        jLabel8 = criarLabelGrafico("Médio");
-        jLabel9 = criarLabelGrafico("Difícil");
-
-        painelLabelsGraficos.add(jLabel10);
-        painelLabelsGraficos.add(jLabel8);
-        painelLabelsGraficos.add(jLabel9);
+        painelLabelsGraficos.add(criarLabelGrafico("Fácil"));
+        painelLabelsGraficos.add(criarLabelGrafico("Médio"));
+        painelLabelsGraficos.add(criarLabelGrafico("Difícil"));
 
         jPanelGraficos.add(Box.createVerticalGlue(), BorderLayout.CENTER);
         jPanelGraficos.add(painelLabelsGraficos, BorderLayout.SOUTH);
@@ -262,7 +244,7 @@ public class TelaGerenciarAlunos extends JFrame {
         painelCentro.add(Box.createVerticalStrut(20));
         painelCentro.add(jPanelGraficos);
 
-        jPanel6.add(jLabel4, BorderLayout.NORTH);
+        jPanel6.add(jLabelNomeAluno, BorderLayout.NORTH);
         jPanel6.add(painelCentro, BorderLayout.CENTER);
 
         return jPanel6;
@@ -276,21 +258,8 @@ public class TelaGerenciarAlunos extends JFrame {
         return label;
     }
 
-    private JPanel criarPainelAlunoVazio() {
-        JPanel painel = new JPanel(new BorderLayout());
-        painel.setBackground(Color.WHITE);
-        painel.setBorder(BorderFactory.createLineBorder(corPrincipal));
-
-        painel.setPreferredSize(new Dimension(400, 45));
-        painel.setMinimumSize(new Dimension(300, 45));
-        painel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
-
-        return painel;
-    }
-
     private void configurarCard(JPanel painel, JLabel label) {
         painel.removeAll();
-
         painel.setBackground(corFundoClaro);
         painel.setBorder(BorderFactory.createLineBorder(corPrincipal));
         painel.setLayout(new BorderLayout());
@@ -300,7 +269,6 @@ public class TelaGerenciarAlunos extends JFrame {
         label.setFont(new Font("Segoe UI", Font.BOLD, 16));
 
         painel.add(label, BorderLayout.CENTER);
-
         painel.setPreferredSize(new Dimension(180, 90));
         painel.setMinimumSize(new Dimension(150, 90));
         painel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 90));
@@ -330,56 +298,83 @@ public class TelaGerenciarAlunos extends JFrame {
     }
 
     private void mostrarAlunosNaTela(ArrayList<Aluno> alunos) {
-        limparPaineisDeAlunos();
+        jPanelListaDeAlunos.removeAll();
 
-        JPanel[] paineis = {jPanel2, jPanel3, jPanel4, jPanel5};
+        jLabelContador.setText(String.valueOf(alunos.size()));
 
-        for (int i = 0; i < paineis.length && i < alunos.size(); i++) {
-            Aluno aluno = alunos.get(i);
-            JPanel painel = paineis[i];
+        if (alunos.isEmpty()) {
+            JLabel semAlunos = new JLabel("  Nenhum aluno encontrado.");
+            semAlunos.setFont(new Font("Segoe UI", Font.ITALIC, 13));
+            semAlunos.setForeground(Color.GRAY);
+            jPanelListaDeAlunos.add(semAlunos);
+        }
 
-            JLabel label = new JLabel("  " + aluno.getNome() + " - " + aluno.getEmail());
-            label.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-            label.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        for (Aluno aluno : alunos) {
+            JPanel painelItem = new JPanel(new BorderLayout());
+            painelItem.setBackground(Color.WHITE);
+            painelItem.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(220, 220, 220)),
+                    new EmptyBorder(8, 12, 8, 12)
+            ));
+            painelItem.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
+            painelItem.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-            label.addMouseListener(new java.awt.event.MouseAdapter() {
+            JLabel labelNome = new JLabel(aluno.getNome());
+            labelNome.setFont(new Font("Segoe UI", Font.BOLD, 13));
+
+            JLabel labelEmail = new JLabel(aluno.getEmail());
+            labelEmail.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+            labelEmail.setForeground(Color.GRAY);
+
+            JPanel painelTexto = new JPanel();
+            painelTexto.setOpaque(false);
+            painelTexto.setLayout(new BoxLayout(painelTexto, BoxLayout.Y_AXIS));
+            painelTexto.add(labelNome);
+            painelTexto.add(labelEmail);
+
+            painelItem.add(painelTexto, BorderLayout.CENTER);
+
+            painelItem.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     mostrarDetalhesAluno(aluno);
                 }
+
+                @Override
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    painelItem.setBackground(new Color(235, 245, 248));
+                }
+
+                @Override
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    painelItem.setBackground(Color.WHITE);
+                }
             });
 
-            painel.setLayout(new BorderLayout());
-            painel.add(label, BorderLayout.CENTER);
-            painel.revalidate();
-            painel.repaint();
+            jPanelListaDeAlunos.add(painelItem);
         }
-    }
 
-    private void limparPaineisDeAlunos() {
-        JPanel[] paineis = {jPanel2, jPanel3, jPanel4, jPanel5};
-
-        for (JPanel painel : paineis) {
-            painel.removeAll();
-            painel.revalidate();
-            painel.repaint();
-        }
+        jPanelListaDeAlunos.revalidate();
+        jPanelListaDeAlunos.repaint();
     }
 
     private void mostrarDetalhesAluno(Aluno aluno) {
-        jLabel4.setText(aluno.getNome());
+        jLabelNomeAluno.setText(aluno.getNome());
 
         int perguntas = aluno.getQuestoesRespondidas();
         int acertos = aluno.getTaxaAcertos();
-        int erros = perguntas - acertos;
+        int erros = aluno.getErros();
 
-        if (erros < 0) {
-            erros = 0;
-        }
+        jLabelPerguntas.setText("Perguntas: " + perguntas);
+        jLabelAcertos.setText("Acertos: " + acertos);
+        jLabelErros.setText("Erros: " + erros);
 
-        jLabel6.setText("Perguntas: " + perguntas);
-        jLabel5.setText("Acertos: " + acertos);
-        jLabel7.setText("Erros: " + erros);
+        jPanelTotalPerguntas.revalidate();
+        jPanelTotalPerguntas.repaint();
+        jPanelAcertos.revalidate();
+        jPanelAcertos.repaint();
+        jPanelErros.revalidate();
+        jPanelErros.repaint();
     }
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {
