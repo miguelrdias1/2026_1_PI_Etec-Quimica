@@ -1,5 +1,9 @@
 package br.com.pi_2026_1_etec.view.telas;
 
+import br.com.pi_2026_1_etec.dao.PerguntaDAO;
+import br.com.pi_2026_1_etec.model.Pergunta;
+import br.com.pi_2026_1_etec.model.Sessao;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -24,10 +28,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-
-import br.com.pi_2026_1_etec.dao.PerguntaDAO;
-import br.com.pi_2026_1_etec.model.Pergunta;
-import br.com.pi_2026_1_etec.model.Sessao;
 
 public class TelaMenuAlunos extends JFrame {
 
@@ -73,7 +73,7 @@ public class TelaMenuAlunos extends JFrame {
     private void initComponents() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Menu Alunos");
-        setMinimumSize(new Dimension(1000, 600));
+        setMinimumSize(new Dimension(1000, 650));
         setBackground(Color.WHITE);
 
         jLayeredPane1 = new JLayeredPane();
@@ -100,6 +100,7 @@ public class TelaMenuAlunos extends JFrame {
     private JPanel criarPainelTopo() {
         JPanel painelTopo = new JPanel(new BorderLayout());
         painelTopo.setOpaque(false);
+        painelTopo.setPreferredSize(new Dimension(900, 45));
 
         menu = new JLabel("Menu");
         menu.setFont(new Font("Segoe UI", Font.BOLD, 28));
@@ -139,12 +140,26 @@ public class TelaMenuAlunos extends JFrame {
         btnDificil.addActionListener(this::btnDificilActionPerformed);
         btnRandom.addActionListener(this::btnRandomActionPerformed);
 
-        painelCentro.add(btnFacil);
-        painelCentro.add(btnMedio);
-        painelCentro.add(btnDificil);
-        painelCentro.add(btnRandom);
+        painelCentro.add(criarCardNivel("Fácil", btnFacil));
+        painelCentro.add(criarCardNivel("Médio", btnMedio));
+        painelCentro.add(criarCardNivel("Difícil", btnDificil));
+        painelCentro.add(criarCardNivel("Aleatório", btnRandom));
 
         return painelCentro;
+    }
+
+    private JPanel criarCardNivel(String titulo, JButton botao) {
+        JPanel card = new JPanel(new BorderLayout(0, 12));
+        card.setOpaque(false);
+
+        JLabel labelTitulo = new JLabel(titulo);
+        labelTitulo.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+
+        card.add(labelTitulo, BorderLayout.NORTH);
+        card.add(botao, BorderLayout.CENTER);
+
+        return card;
     }
 
     private JButton criarBotaoNivel(Color cor, String caminhoIcone, String textoAlternativo) {
@@ -167,19 +182,22 @@ public class TelaMenuAlunos extends JFrame {
     }
 
     private JPanel criarPainelInferior() {
-        JPanel painelInferior = new JPanel(new BorderLayout(20, 0));
+        JPanel painelInferior = new JPanel(new BorderLayout(25, 0));
         painelInferior.setOpaque(false);
-        painelInferior.setBorder(new EmptyBorder(10, 5, 0, 5));
-        painelInferior.setPreferredSize(new Dimension(900, 130));
+        painelInferior.setBorder(new EmptyBorder(15, 5, 0, 5));
+        painelInferior.setPreferredSize(new Dimension(900, 175));
+        painelInferior.setMinimumSize(new Dimension(900, 160));
 
         jLabel2 = new JLabel();
         jLabel2.setBackground(new Color(10, 141, 168));
         jLabel2.setOpaque(true);
-        jLabel2.setPreferredSize(new Dimension(95, 110));
+        jLabel2.setPreferredSize(new Dimension(125, 125));
+        jLabel2.setMinimumSize(new Dimension(125, 125));
         jLabel2.setLayout(new BorderLayout());
 
         jLabel3 = new JLabel();
         jLabel3.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel3.setVerticalAlignment(SwingConstants.CENTER);
 
         try {
             jLabel3.setIcon(new ImageIcon(getClass().getResource("/ImagensEtec/menu.png")));
@@ -195,24 +213,25 @@ public class TelaMenuAlunos extends JFrame {
         painelTexto.setOpaque(false);
         painelTexto.setLayout(new BoxLayout(painelTexto, BoxLayout.Y_AXIS));
         painelTexto.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelTexto.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         jLabel4 = new JLabel("Como funciona o jogo?");
-        jLabel4.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        jLabel4.setFont(new Font("Segoe UI", Font.BOLD, 20));
         jLabel4.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        jLabel6 = criarLabelExplicacao("Selecione uma das dificuldades acima e pratique");
-        jLabel7 = criarLabelExplicacao("o quanto quiser! Seu resultado será guardado");
-        jLabel8 = criarLabelExplicacao("para que você possa analisar questões que você");
-        jLabel5 = criarLabelExplicacao("possui mais dificuldade!");
+        jLabel6 = criarLabelExplicacao("Escolha uma dificuldade acima para começar a praticar.");
+        jLabel7 = criarLabelExplicacao("Ao responder às questões, seu desempenho será registrado.");
+        jLabel8 = criarLabelExplicacao("Depois, você poderá acompanhar seus resultados");
+        jLabel5 = criarLabelExplicacao("e identificar os conteúdos em que possui mais dificuldade.");
 
         painelTexto.add(jLabel4);
-        painelTexto.add(Box.createVerticalStrut(14));
+        painelTexto.add(Box.createVerticalStrut(18));
         painelTexto.add(jLabel6);
-        painelTexto.add(Box.createVerticalStrut(4));
+        painelTexto.add(Box.createVerticalStrut(6));
         painelTexto.add(jLabel7);
-        painelTexto.add(Box.createVerticalStrut(4));
+        painelTexto.add(Box.createVerticalStrut(6));
         painelTexto.add(jLabel8);
-        painelTexto.add(Box.createVerticalStrut(4));
+        painelTexto.add(Box.createVerticalStrut(6));
         painelTexto.add(jLabel5);
 
         painelInferior.add(jLabel2, BorderLayout.WEST);
@@ -223,7 +242,7 @@ public class TelaMenuAlunos extends JFrame {
 
     private JLabel criarLabelExplicacao(String texto) {
         JLabel label = new JLabel(texto);
-        label.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        label.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         label.setHorizontalAlignment(SwingConstants.LEFT);
         label.setAlignmentX(Component.LEFT_ALIGNMENT);
         return label;
@@ -233,7 +252,6 @@ public class TelaMenuAlunos extends JFrame {
         try {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(2);
-            this.dispose();
             new TelaQuestao1(perguntas).setVisible(true);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
@@ -244,7 +262,6 @@ public class TelaMenuAlunos extends JFrame {
         try {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(1);
-            this.dispose();
             new TelaQuestao1(perguntas).setVisible(true);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
@@ -260,17 +277,8 @@ public class TelaMenuAlunos extends JFrame {
     private void btnRandomActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             PerguntaDAO dao = new PerguntaDAO();
-            List<Pergunta> perguntasFaceis = dao.listarPorNivel(1);
-            List<Pergunta> perguntasMedias = dao.listarPorNivel(2);
-            List<Pergunta> perguntasDificeis = dao.listarPorNivel(3);
-            List<Pergunta> todasAsPerguntas= new java.util.ArrayList<>();
-            todasAsPerguntas.addAll(perguntasFaceis);
-            todasAsPerguntas.addAll(perguntasMedias);
-            todasAsPerguntas.addAll(perguntasDificeis);
-            java.util.Collections.shuffle(todasAsPerguntas);
-
-            new TelaQuestao1(todasAsPerguntas).setVisible(true);
-            this.dispose();
+            List<Pergunta> perguntas = dao.listarPorNivel(0);
+            new TelaQuestao1(perguntas).setVisible(true);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
@@ -280,7 +288,6 @@ public class TelaMenuAlunos extends JFrame {
         try {
             PerguntaDAO dao = new PerguntaDAO();
             List<Pergunta> perguntas = dao.listarPorNivel(3);
-            this.dispose();
             new TelaQuestao1(perguntas).setVisible(true);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
