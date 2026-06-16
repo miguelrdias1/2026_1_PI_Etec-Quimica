@@ -41,6 +41,7 @@ public class TelaAlterarPergunta extends JFrame {
     private JButton jButton1;
     private JButton jButtonRemoverImagem;
     private JButton jButtonVoltar;
+    private JButton jButtonDeletar; // NOVO
 
     private JComboBox<String> jComboBox1;
     private JComboBox<Object> jComboBox2;
@@ -82,6 +83,9 @@ public class TelaAlterarPergunta extends JFrame {
         carregarMateriaisNoCombobox();
 
         jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        // NOVO: só exibe o botão deletar quando estiver editando uma pergunta existente
+        jButtonDeletar.setVisible(idPergunta > 0);
 
         if (idPergunta > 0) {
             carregarDadosDaPergunta(idPergunta);
@@ -322,12 +326,21 @@ public class TelaAlterarPergunta extends JFrame {
         jButton1.setFont(new Font("Segoe UI", Font.BOLD, 12));
         jButton1.setPreferredSize(new Dimension(170, 32));
 
+        // NOVO: botão deletar
+        jButtonDeletar = new JButton("Deletar pergunta");
+        jButtonDeletar.setBackground(new Color(180, 0, 0));
+        jButtonDeletar.setForeground(Color.WHITE);
+        jButtonDeletar.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        jButtonDeletar.setPreferredSize(new Dimension(150, 32));
+        jButtonDeletar.addActionListener(this::jButtonDeletarActionPerformed);
+
         JPanel painelDificuldade = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         painelDificuldade.setOpaque(false);
         painelDificuldade.add(jComboBox1);
 
-        JPanel painelSalvar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+        JPanel painelSalvar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
         painelSalvar.setOpaque(false);
+        painelSalvar.add(jButtonDeletar); // NOVO
         painelSalvar.add(jButton1);
 
         painelRodape.add(painelDificuldade, BorderLayout.WEST);
@@ -547,6 +560,62 @@ public class TelaAlterarPergunta extends JFrame {
             }
         } else {
             atualizarPergunta(enunciado, altA, altB, altC, altD, dificuldade);
+        }
+    }
+
+    // NOVO: handler do botão deletar
+    private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {
+        int confirmacao = JOptionPane.showConfirmDialog(
+                this,
+                "Tem certeza que deseja deletar esta pergunta?\nEsta ação não pode ser desfeita.",
+                "Confirmar exclusão",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (confirmacao != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        String sqlDeleteAlternativas = "DELETE FROM alternativa WHERE id_pergunta = ?";
+        String sqlDeletePergunta     = "DELETE FROM pergunta WHERE id_pergunta = ?";
+
+        try (java.sql.Connection conn =
+                     br.com.pi_2026_1_etec.config.ConexaoBD.obterConexao()) {
+
+            conn.setAutoCommit(false);
+
+            // 1º apaga as alternativas (FK) antes de apagar a pergunta
+            try (java.sql.PreparedStatement ps = conn.prepareStatement(sqlDeleteAlternativas)) {
+                ps.setInt(1, idPergunta);
+                ps.executeUpdate();
+            }
+
+            // 2º apaga a pergunta
+            try (java.sql.PreparedStatement ps = conn.prepareStatement(sqlDeletePergunta)) {
+                ps.setInt(1, idPergunta);
+                ps.executeUpdate();
+            }
+
+            conn.commit();
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Pergunta deletada com sucesso!",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            new TelaGerenciamentoDePergunta().setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Erro ao deletar: " + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 
