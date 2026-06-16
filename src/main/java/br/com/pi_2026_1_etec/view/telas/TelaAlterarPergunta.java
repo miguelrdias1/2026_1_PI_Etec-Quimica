@@ -84,7 +84,6 @@ public class TelaAlterarPergunta extends JFrame {
 
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
-        // NOVO: só exibe o botão deletar quando estiver editando uma pergunta existente
         jButtonDeletar.setVisible(idPergunta > 0);
 
         if (idPergunta > 0) {
@@ -326,7 +325,6 @@ public class TelaAlterarPergunta extends JFrame {
         jButton1.setFont(new Font("Segoe UI", Font.BOLD, 12));
         jButton1.setPreferredSize(new Dimension(170, 32));
 
-        // NOVO: botão deletar
         jButtonDeletar = new JButton("Deletar pergunta");
         jButtonDeletar.setBackground(new Color(180, 0, 0));
         jButtonDeletar.setForeground(Color.WHITE);
@@ -459,11 +457,9 @@ public class TelaAlterarPergunta extends JFrame {
     }
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Mantido para preservar função existente.
     }
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Mantido para preservar função existente.
     }
 
     private void jButtonRemoverImagemActionPerformed(java.awt.event.ActionEvent evt) {
@@ -525,7 +521,6 @@ public class TelaAlterarPergunta extends JFrame {
     }
 
     private void jTextFieldEditarPerguntaActionPerformed(java.awt.event.ActionEvent evt) {
-        // Mantido para preservar função existente.
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -563,7 +558,6 @@ public class TelaAlterarPergunta extends JFrame {
         }
     }
 
-    // NOVO: handler do botão deletar
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {
         int confirmacao = JOptionPane.showConfirmDialog(
                 this,
@@ -585,13 +579,11 @@ public class TelaAlterarPergunta extends JFrame {
 
             conn.setAutoCommit(false);
 
-            // 1º apaga as alternativas (FK) antes de apagar a pergunta
             try (java.sql.PreparedStatement ps = conn.prepareStatement(sqlDeleteAlternativas)) {
                 ps.setInt(1, idPergunta);
                 ps.executeUpdate();
             }
 
-            // 2º apaga a pergunta
             try (java.sql.PreparedStatement ps = conn.prepareStatement(sqlDeletePergunta)) {
                 ps.setInt(1, idPergunta);
                 ps.executeUpdate();
